@@ -1,25 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Category from './pages/Category';
+import Detail from './pages/Detail';
+import Game from './pages/Game';
+import Landing from './pages/Landing';
+import Random from './pages/Random';
+import Weather from './pages/Weather';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/category" element={<Category />} />
+        <Route path="/random" element={<Random />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/weather" element={<Weather />} />
+        <Route path="/detail" element={<Detail />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
