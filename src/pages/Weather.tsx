@@ -5,10 +5,6 @@ import { fetchWeatherData, getLocation } from '../API/WeatherAPI/index';
 import { getCocktailWithWeather } from '../API/CocktailAPI/index';
 import DaumPostcode from 'react-daum-postcode';
 
-//const API_KEY = process.env.REACT_APP_API_KEY;
-//console.log(API_KEY);
-//const API_KEY = '48a5fd1260a37826f8e477ce54dfde74';
-
 type WeatherData = {
   name: string;
   main: {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = '48a5fd1260a37826f8e477ce54dfde74';
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 type WeatherData = {
   name: string;
