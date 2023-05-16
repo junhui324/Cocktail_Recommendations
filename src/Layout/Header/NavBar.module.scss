@@ -1,15 +1,9 @@
-.ul {
-  all: unset;
-  list-style: none;
-  display: flex;
+.nav {
+  display: none;
 }
 
-.li {
-  width: 100px;
-  text-align: center;
-  border-right: 1px solid black;
-
-  &:first-child {
-    border-left: 1px solid black;
+@media (min-width: 768px) {
+  .nav {
+    display: block;
   }
 }
