@@ -6,6 +6,7 @@ import {
   getRandomCocktailWithFavour,
   getRandomCockTail,
 } from "../../API/CocktailAPI/index";
+import styles from "./Option.module.scss";
 
 interface OptionInterface {
   setRandom: React.Dispatch<any>;
@@ -41,7 +42,9 @@ function Option({ setRandom }: OptionInterface) {
 
       <Alcohol setAlcoholic={setAlcoholic} />
 
-      <button>Re-Recommend</button>
+      <div className={styles.btn_div}>
+        <button>Re-Recommend</button>
+      </div>
     </form>
   );
 }
