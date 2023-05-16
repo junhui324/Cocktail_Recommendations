@@ -1,22 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import styles from "./Description.module.scss";
 
 interface DescriptionInterface {
   description: string;
 }
 
-// const dataNumber = new Array(15)
-//   .fill(0)
-//   .map((item, index) => (item = index + 1));
-
-// const dataNumber = new Array(15)
-//   .fill(0)
-//   .map((item, index) => (item = `strIngredient${index + 1}`));
-
-function Description({ data }: any) {
+function Description({ description }: DescriptionInterface) {
   return (
-    <div>
-      <div>{data.strInstructions}</div>
-    </div>
+    <section className={styles.section}>
+      <div className={styles.desc}>{description}</div>
+
+      <div className={styles.link_div}>
+        <Link to="/detail" className={styles.link}>
+          Show Detail
+        </Link>
+      </div>
+    </section>
   );
 }
 
