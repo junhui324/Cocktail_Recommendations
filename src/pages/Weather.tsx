@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../Layout/Layout';
 import { fetchWeatherData, getLocation } from '../API/WeatherAPI/index';
 import { getCocktailWithWeather } from '../API/CocktailAPI/index';
+import DaumPostcode from 'react-daum-postcode';
 
 //const API_KEY = process.env.REACT_APP_API_KEY;
 //console.log(API_KEY);
@@ -19,6 +20,46 @@ type WeatherData = {
     icon: string;
   }[];
 };
+
+function SearchAddress(): JSX.Element {
+  const [openPostcode, setOpenPostcode] = useState<boolean>(false);
+  const [address, setAddress] = useState<string>('');
+  const [zonecode, setZonecode] = useState<string>('');
+
+  const handleSearchAddressButton = {
+    // 버튼 클릭 이벤트
+    clickButton: () => {
+      setOpenPostcode((current) => !current);
+    },
+
+    // 주소 선택 이벤트
+    selectAddress: (data: any) => {
+      console.log(`
+            주소: ${data.address},
+            우편번호: ${data.zonecode}
+        `);
+      setAddress(data.address);
+      setZonecode(data.zonecode);
+      setOpenPostcode(false);
+    },
+  };
+
+  //context를 써서 ... 다른 컴포넌트에서도 address를 사용할 수 있게 해야하나..
+  console.log('address : ', address, ' zonecode : ', zonecode);
+
+  return (
+    <div>
+      <button onClick={handleSearchAddressButton.clickButton}>주소 검색</button>
+
+      {openPostcode && (
+        <DaumPostcode
+          onComplete={handleSearchAddressButton.selectAddress} // 값을 선택할 경우 실행되는 이벤트
+          autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
+        />
+      )}
+    </div>
+  );
+}
 
 function Clock() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -53,7 +94,7 @@ function Cocktail({ mainWeather }: CocktailProps) {
     const getCocktail = async () => {
       try {
         const cocktailData = await getCocktailWithWeather(mainWeather);
-        console.log(cocktailData);
+        //console.log(cocktailData);
         setCocktail(cocktailData);
       } catch (error) {
         console.error('Error:', error);
@@ -126,6 +167,10 @@ function Weather() {
       <hr />
       <div>
         <Cocktail mainWeather={mainWeather}></Cocktail>
+      </div>
+      <p>주소 검색</p>
+      <div>
+        <SearchAddress></SearchAddress>
       </div>
     </Layout>
   );
