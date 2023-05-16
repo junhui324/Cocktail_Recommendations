@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { getAlcoholState } from "../../API/CocktailAPI";
+import styles from "./Alcohol.module.scss";
 
 interface AlcoholInterface {
   setAlcoholic: React.Dispatch<React.SetStateAction<string>>;
@@ -31,23 +32,21 @@ function Alcohol({ setAlcoholic }: AlcoholInterface) {
   };
 
   return (
-    <fieldset>
+    <fieldset className={styles.filedset}>
       <legend>Alcohol</legend>
 
       {alcohol?.map((item: any, index: number) => (
-        <React.Fragment key={index}>
-          <label htmlFor={`alcohol_${item.strAlcoholic}`}>
-            <input
-              type="radio"
-              value={item.strAlcoholic}
-              id={`alcohol_${item.strAlcoholic}`}
-              name="alcohol"
-              onChange={changeHandler}
-              checked={checked === item.strAlcoholic}
-            />
-            {item.strAlcoholic}
-          </label>
-        </React.Fragment>
+        <label htmlFor={`alcohol_${item.strAlcoholic}`} key={index}>
+          <input
+            type="radio"
+            value={item.strAlcoholic}
+            id={`alcohol_${item.strAlcoholic}`}
+            name="alcohol"
+            onChange={changeHandler}
+            checked={checked === item.strAlcoholic}
+          />
+          {item.strAlcoholic}
+        </label>
       ))}
     </fieldset>
   );

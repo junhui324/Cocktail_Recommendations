@@ -1,28 +1,12 @@
 import React from "react";
 
-import CustomNavLink from "../../components/NavLink/CustomNavLink";
-import "./NavBar.module.scss";
+import NavList from "./NavList";
+import styles from "./NavBar.module.scss";
 
 function NavBar() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <CustomNavLink to="/" text="Home" />
-        </li>
-        <li>
-          <CustomNavLink to="/category" text="Cocktail" />
-        </li>
-        <li>
-          <CustomNavLink to="/random" text="Random" />
-        </li>
-        <li>
-          <CustomNavLink to="/weather" text="Weather" />
-        </li>
-        <li>
-          <CustomNavLink to="/game" text="Quiz" />
-        </li>
-      </ul>
+    <nav className={styles.nav}>
+      <NavList />
     </nav>
   );
 }
