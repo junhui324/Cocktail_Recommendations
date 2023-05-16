@@ -177,3 +177,41 @@ async function makeRandomCocktailWithOption(filteredCocktail: any) {
 
   return filteredCocktail[randomIndex];
 }
+
+/**
+ * glass 옵션으로 칵테일 받아오기 - 날씨 관련
+ */
+async function getCocktailWithWeather(mainWeather: string) {
+  const weatherToDrinkMap = new Map<string, string>([
+    ['Thunderstorm', 'Coffee_mug'],
+    ['Tornado', 'Coffee_mug'],
+    ['Rain', 'Coffee_mug'],
+    ['Squall', 'Coffee_mug'],
+    ['Drizzle', 'Collins_glass'],
+    ['Mist', 'Collins_glass'],
+    ['Smoke', 'Collins_glass'],
+    ['Fog', 'Collins_glass'],
+    ['Haze', 'Collins_glass'],
+    ['Snow', 'Irish_coffee_cup'],
+    ['Clear', 'Cocktail_glass'],
+    ['Clouds', 'Highball_glass'],
+    ['Dust', 'Highball_glass'],
+    ['Sand', 'Highball_glass'],
+    ['Ash', 'Highball_glass'],
+  ]);
+
+  try {
+    const glassOption = weatherToDrinkMap.get(mainWeather);
+    if (glassOption) {
+      const res = await fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=${glassOption}`
+      );
+      const response = await res.json();
+      return response.drinks;
+    }
+  } catch (err) {
+    throw new Error('Glass 옵션 칵테일 API 통신 에러');
+  }
+}
+
+export { getCocktailWithWeather };
