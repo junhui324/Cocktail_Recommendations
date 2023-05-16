@@ -7,12 +7,20 @@ import { fetchWeatherData, getLocation } from '../API/WeatherAPI/index';
 //console.log(API_KEY);
 //const API_KEY = '48a5fd1260a37826f8e477ce54dfde74';
 
+//const glassWeather = ["Thunderstorm", "Drizzle", "Rain", "Snow",
+//  "Mist", "Smoke", "Haze", "Dust", "Fog", "Sand", "Ash", "Squall", "Tornado",
+//  "Clear", "Clouds"];
+
+//const mainWeatherId = []
+
 type WeatherData = {
   name: string;
   main: {
     temp: number;
   };
   weather: {
+    id: number;
+    main: string;
     description: string;
     icon: string;
   }[];
@@ -58,8 +66,11 @@ function Weather() {
 
   const { name, main, weather: weatherDetails } = weather;
   const temperature = `${main.temp.toFixed(0)} °C`;
-  const { description, icon } = weatherDetails[0];
+  const { id, description, icon } = weatherDetails[0];
+  const mainWeather = weatherDetails[0].main;
   const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+
+  console.log(mainWeather, id);
 
   return (
     <Layout>

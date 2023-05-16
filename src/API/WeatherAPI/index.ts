@@ -8,6 +8,8 @@ type WeatherData = {
     temp: number;
   };
   weather: {
+    id: number;
+    main: string;
     description: string;
     icon: string;
   }[];
