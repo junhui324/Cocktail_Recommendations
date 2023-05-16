@@ -26,6 +26,8 @@ function Random() {
 
         {random ? <Information random={random} /> : <NoData />}
 
+        <hr />
+
         <Favour setRandom={setRandom} />
       </div>
     </Layout>

@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import styles from "./CustomNavLink.module.scss";
+
 interface CustomNavLinkInterface {
   to: string;
   text: string;
@@ -8,13 +10,14 @@ interface CustomNavLinkInterface {
 
 function CustomNavLink(props: CustomNavLinkInterface) {
   const activeStyle = {
-    backgroundColor: "blue",
+    borderBottom: "2px solid black",
   };
 
   return (
     <NavLink
       to={props.to}
       style={({ isActive }) => (isActive ? activeStyle : {})}
+      className={styles.navlink}
     >
       {props.text}
     </NavLink>

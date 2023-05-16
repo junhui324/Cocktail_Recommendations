@@ -1,9 +1,10 @@
-.nav {
-  display: none;
+.navlink {
+  all: unset;
 }
 
 @media (min-width: 768px) {
-  .nav {
+  .navlink {
     display: block;
+    width: 70%;
   }
 }
