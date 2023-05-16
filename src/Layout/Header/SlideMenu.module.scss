@@ -1,0 +1,16 @@
+.nav {
+  width: 70vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.btn_div {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 10px;
+
+  button {
+    all: unset;
+    font-size: 30px;
+  }
+}
