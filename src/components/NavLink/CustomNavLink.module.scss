@@ -1,3 +1,10 @@
 .navlink {
   all: unset;
 }
+
+@media (min-width: 768px) {
+  .navlink {
+    display: block;
+    width: 70%;
+  }
+}

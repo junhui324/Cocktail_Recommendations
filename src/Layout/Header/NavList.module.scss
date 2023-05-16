@@ -29,6 +29,9 @@
     width: 150px;
     text-align: center;
     border-right: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:first-child {
       border-left: 1px solid black;
