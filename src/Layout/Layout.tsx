@@ -2,14 +2,14 @@ import React from "react";
 
 import Header from "./Header/Header";
 import Footer from "./Footer";
-import "./Layout.module.scss";
+import styles from "./Layout.module.scss";
 
 function Layout(props: { children: React.ReactNode }) {
   return (
     <div>
       <Header />
 
-      <main>{props.children}</main>
+      <main className={styles.main}>{props.children}</main>
 
       <Footer />
     </div>
