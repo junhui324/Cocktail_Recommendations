@@ -11,6 +11,10 @@ interface cocktailListType {
   idDrink: string;
 }
 
+interface isCheckedType {
+  [key: string]: boolean;
+}
+
 const CATEGORY: CategoryType = {
   GIN: 'Gin',
   VODKA: 'Vodka',
@@ -30,13 +34,14 @@ const CATEGORY: CategoryType = {
 function Category() {
   const [filteringKey, setFilteringKey] = useState<Record<string, boolean>>({});
   const [cocktailList, setCocktailList] = useState<cocktailListType[]>([]);
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<isCheckedType>({});
 
   const findCocktailsByCategory = async (category: string) => {
     const response = await axios.get(
       `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`
     );
     const cocktailInfoList = response.data.drinks;
+    console.log(cocktailInfoList);
     setCocktailList(() => {
       return cocktailInfoList;
     });
@@ -51,16 +56,20 @@ function Category() {
   }, [filteringKey]);
 
   const handleIsChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(e.target.checked);
-    if (isChecked) {
+    const { value, checked } = e.target;
+    setIsChecked((current) => {
+      const newIsChecked = { ...current, [value]: !checked };
+      return newIsChecked;
+    });
+    if (isChecked[value]) {
       return setFilteringKey((filteringKey) => ({
         ...filteringKey,
-        [e.target.value]: true,
+        [value]: true,
       }));
     }
     setFilteringKey((filteringKey) => {
       const newFilteringKey: Record<string, boolean> = { ...filteringKey };
-      delete newFilteringKey[e.target.value];
+      delete newFilteringKey[value];
       return newFilteringKey;
     });
   };
@@ -72,7 +81,7 @@ function Category() {
           <input
             type="checkbox"
             name="category"
-            checked={isChecked}
+            checked={isChecked[category]}
             value={CATEGORY[category]}
             onChange={handleIsChecked}
           />
