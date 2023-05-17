@@ -104,7 +104,10 @@ function Cocktail({ mainWeather }: CocktailProps) {
     <div>
       <ul>
         {cocktail.map((drink) => (
-          <li key={drink.idDrink}>{drink.strDrink}</li>
+          <li key={drink.idDrink}>
+            {drink.strDrink}
+            <img src={drink.strDrinkThumb} alt="drink img"></img>
+          </li>
         ))}
       </ul>
     </div>
