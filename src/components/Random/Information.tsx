@@ -15,7 +15,7 @@ function Information({ random }: any) {
           />
         </div>
 
-        <Description description={random.strInstructions} />
+        <Description name={random.strDrink} cocktailId={random.idDrink} />
       </section>
     )
   );

@@ -1,6 +1,7 @@
 .section {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .image_div {
@@ -15,17 +16,12 @@
 }
 
 @media (min-width: 768px) {
-  .section {
-    flex-direction: row;
-  }
-
   .image_div {
-    margin-right: 20px;
     width: 50%;
   }
 
   .image {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
   }
 }

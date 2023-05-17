@@ -4,16 +4,17 @@ import { Link } from "react-router-dom";
 import styles from "./Description.module.scss";
 
 interface DescriptionInterface {
-  description: string;
+  name: string;
+  cocktailId: string;
 }
 
-function Description({ description }: DescriptionInterface) {
+function Description({ name, cocktailId }: DescriptionInterface) {
   return (
     <section className={styles.section}>
-      <div className={styles.desc}>{description}</div>
+      <h2 className={styles.name}>{name}</h2>
 
       <div className={styles.link_div}>
-        <Link to="/detail" className={styles.link}>
+        <Link to={`/detail/${cocktailId}`} className={styles.link}>
           Show Detail
         </Link>
       </div>
