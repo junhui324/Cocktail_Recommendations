@@ -19,9 +19,6 @@ function Option({ setRandom }: OptionInterface) {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(category);
-    console.log(alcoholic);
-
     if (category === "All" && alcoholic === "All") {
       const data = await getRandomCockTail();
 
@@ -33,7 +30,6 @@ function Option({ setRandom }: OptionInterface) {
     const data = await getRandomCocktailWithFavour(category, alcoholic);
 
     setRandom(data);
-    console.log(data);
   };
 
   return (
