@@ -1,0 +1,20 @@
+.btn_div {
+  display: flex;
+  justify-content: center;
+
+  button {
+    all: unset;
+    width: 150px;
+    padding: 5px 10px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: black;
+      color: white;
+      transition: all 0.5s;
+    }
+  }
+}
