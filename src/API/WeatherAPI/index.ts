@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+const GEO_API_KEY = process.env.REACT_APP_GEO_API_KEY;
 
 type WeatherData = {
   name: string;
@@ -48,4 +49,20 @@ const getLocation = (): Promise<GeolocationPosition> => {
   });
 };
 
-export { fetchWeatherData, getLocation };
+const GeocoderAPI = async (address: string) => {
+  try {
+    const URL =
+      `/req/address?service=address` +
+      `&request=getcoord&version=2.0` +
+      `&address=` +
+      encodeURI(address) +
+      `&type=road&key=${GEO_API_KEY}`;
+    const response = await axios.get(URL);
+    //console.log(response.data.response.result.point);
+    return response.data.response.result.point;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export { fetchWeatherData, getLocation, GeocoderAPI };
