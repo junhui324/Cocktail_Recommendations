@@ -6,27 +6,26 @@ type cocktailListType = {
 };
 
 interface alcoholicOpsPropsType {
-  wholeCocktailList: cocktailListType[];
+  wholeCocktails: cocktailListType[];
 }
 
-function AlcoholicOps({ wholeCocktailList }: alcoholicOpsPropsType) {
+function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
   const [alcoholicOps, setAlcoholicOps] = useState<string>('All');
   const [alcoholFilteredList, setAlcoholFilteredList] =
-    useState<cocktailListType[]>(wholeCocktailList);
-
+    useState<cocktailListType[]>(wholeCocktails);
   //알코올 필터링
   useEffect(() => {
     setAlcoholFilteredList(() => {
-      return [...wholeCocktailList];
+      return wholeCocktails;
     });
-  }, []);
+  }, [wholeCocktails]);
 
   const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     const { value } = e.target as HTMLButtonElement;
     setAlcoholicOps(value);
 
     if (alcoholicOps !== 'All') {
-      const newCocktailList = wholeCocktailList.filter(
+      const newCocktailList = wholeCocktails.filter(
         (cocktail) =>
           cocktail.strAlcoholic === alcoholicOps ||
           cocktail.strAlcoholic === 'Optional alcohol'
@@ -36,7 +35,7 @@ function AlcoholicOps({ wholeCocktailList }: alcoholicOpsPropsType) {
       return;
     }
     setAlcoholFilteredList(() => {
-      const cocktailListNonOps = [...wholeCocktailList];
+      const cocktailListNonOps = [...wholeCocktails];
       return cocktailListNonOps;
     });
     console.log('알코올 필터링 미적용(All)', alcoholFilteredList);
@@ -44,16 +43,21 @@ function AlcoholicOps({ wholeCocktailList }: alcoholicOpsPropsType) {
 
   return (
     <>
-      <p>지금 렌더링되는 칵테일은 {alcoholicOps}입니다.</p>
-      <button className="filter" value="All" onClick={handleOnClick}>
-        All
-      </button>
-      <button className="filter" value="Alcoholic" onClick={handleOnClick}>
-        Alcoholic
-      </button>
-      <button className="filter" value="Non alcoholic" onClick={handleOnClick}>
-        Non-Alcoholic
-      </button>
+      <div style={{ display: 'flex', alignItems: 'flex-start', margin: 0 }}>
+        <button className="filter" value="All" onClick={handleOnClick}>
+          All
+        </button>
+        <button className="filter" value="Alcoholic" onClick={handleOnClick}>
+          Alcoholic
+        </button>
+        <button
+          className="filter"
+          value="Non alcoholic"
+          onClick={handleOnClick}
+        >
+          Non-Alcoholic
+        </button>
+      </div>
       <CheckboxAll alcoholFilteredList={alcoholFilteredList} />
     </>
   );
