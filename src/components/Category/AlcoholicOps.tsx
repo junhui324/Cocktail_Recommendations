@@ -16,8 +16,9 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
 
   //디버깅
   useEffect(() => {
-    console.log('알코올 필터링 변경', alcoholFilteredList);
-  }, [alcoholFilteredList]);
+    console.log('알코올 필터링 변경', alcoholicOps);
+    console.log('알코올 필터링된 목록', alcoholFilteredList);
+  }, [alcoholicOps, alcoholFilteredList]);
 
   //알코올 필터링
   useEffect(() => {
@@ -26,10 +27,7 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
     });
   }, [wholeCocktails]);
 
-  const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    const { value } = e.target as HTMLButtonElement;
-    setAlcoholicOps(value);
-
+  useEffect(() => {
     if (alcoholicOps !== 'All') {
       const newCocktailList = wholeCocktails.filter(
         (cocktail) =>
@@ -43,6 +41,11 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
       const cocktailListNonOps = [...wholeCocktails];
       return cocktailListNonOps;
     });
+  }, [alcoholicOps]);
+
+  const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    const { value } = e.target as HTMLButtonElement;
+    setAlcoholicOps(() => value);
   };
 
   return (
