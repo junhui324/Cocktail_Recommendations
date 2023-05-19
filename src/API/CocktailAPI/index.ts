@@ -5,7 +5,7 @@
 export async function getRandomCockTail() {
   try {
     const res = await fetch(
-      'https://www.thecocktaildb.com/api/json/v1/1/random.php'
+      "https://www.thecocktaildb.com/api/json/v1/1/random.php"
     );
 
     const response = await res.json();
@@ -13,7 +13,7 @@ export async function getRandomCockTail() {
     // return response.drinks;
     return response.drinks[0];
   } catch (err) {
-    throw new Error('랜덤 칵테일 API 통신 에러');
+    throw new Error("랜덤 칵테일 API 통신 에러");
   }
 }
 
@@ -24,14 +24,14 @@ export async function getRandomCockTail() {
 export async function getCateogry() {
   try {
     const res = await fetch(
-      'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list'
+      "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"
     );
 
     const response = await res.json();
 
     return response.drinks;
   } catch (err) {
-    throw new Error('카테고리 목록 API 통신 에러');
+    throw new Error("카테고리 목록 API 통신 에러");
   }
 }
 
@@ -42,14 +42,14 @@ export async function getCateogry() {
 export async function getAlcoholState() {
   try {
     const res = await fetch(
-      'https://www.thecocktaildb.com/api/json/v1/1/list.php?a=list'
+      "https://www.thecocktaildb.com/api/json/v1/1/list.php?a=list"
     );
 
     const response = await res.json();
 
     return response.drinks;
   } catch (err) {
-    throw new Error('알코올 여부 목록 API 통신 에러');
+    throw new Error("알코올 여부 목록 API 통신 에러");
   }
 }
 
@@ -61,32 +61,32 @@ async function getWholeCocktailUsingAlphabet() {
   let wholeCocktail: any[] = [];
 
   const alphabet = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
   ];
 
   try {
@@ -110,7 +110,7 @@ async function getWholeCocktailUsingAlphabet() {
 
     return wholeCocktail;
   } catch (err) {
-    throw new Error('전체 데이터 fetch 중 에러 발생');
+    throw new Error("전체 데이터 fetch 중 에러 발생");
   }
 }
 
@@ -124,7 +124,7 @@ export async function getRandomCocktailWithFavour(
   categoryOpt: string,
   alcoholOpt: string
 ) {
-  if (categoryOpt === 'All' && alcoholOpt !== 'All') {
+  if (categoryOpt === "All" && alcoholOpt !== "All") {
     try {
       const wholeCocktail = await getWholeCocktailUsingAlphabet();
 
@@ -134,11 +134,11 @@ export async function getRandomCocktailWithFavour(
 
       return makeRandomCocktailWithOption(filteredCocktail);
     } catch (err) {
-      throw new Error('취향 반영 랜덤 칵테일 생성 중 에러 발생');
+      throw new Error("취향 반영 랜덤 칵테일 생성 중 에러 발생");
     }
   }
 
-  if (categoryOpt !== 'All' && alcoholOpt === 'All') {
+  if (categoryOpt !== "All" && alcoholOpt === "All") {
     try {
       const wholeCocktail = await getWholeCocktailUsingAlphabet();
 
@@ -148,7 +148,7 @@ export async function getRandomCocktailWithFavour(
 
       return makeRandomCocktailWithOption(filteredCocktail);
     } catch (err) {
-      throw new Error('취향 반영 랜덤 칵테일 생성 중 에러 발생');
+      throw new Error("취향 반영 랜덤 칵테일 생성 중 에러 발생");
     }
   }
 
@@ -163,7 +163,7 @@ export async function getRandomCocktailWithFavour(
 
     return makeRandomCocktailWithOption(filteredCocktail);
   } catch (err) {
-    throw new Error('취향 반영 랜덤 칵테일 생성 중 에러 발생');
+    throw new Error("취향 반영 랜덤 칵테일 생성 중 에러 발생");
   }
 }
 
@@ -176,4 +176,55 @@ async function makeRandomCocktailWithOption(filteredCocktail: any) {
   const randomIndex = Math.floor(Math.random() * filteredCocktail.length);
 
   return filteredCocktail[randomIndex];
+}
+
+export type QuizQuestion = {
+  id: string; // 고유한 질문 ID
+  cocktail: {
+    idDrink: string; // 칵테일 ID
+    strDrink: string; // 칵테일 이름
+    strInstructions: string; // 칵테일 조리 방법
+    strDrinkThumb: string; // 칵테일 이미지 URL
+  };
+  choices: any[]; // 선택지 배열 (칵테일 이름으로 구성)
+  answer: string; // 정답 칵테일 이름
+};
+
+export async function fetchQuestions(): Promise<QuizQuestion[]> {
+  const cocktailResponse = await getWholeCocktailUsingAlphabet();
+  const quizQuestions: QuizQuestion[] = [];
+
+  for (let i = 0; i < 4; i++) {
+    const cocktail = cocktailResponse[i];
+    const choices = getRandomCocktails(cocktailResponse, 3);
+    quizQuestions.push({
+      id: i.toString(),
+      cocktail: {
+        idDrink: cocktail.idDrink,
+        strDrink: cocktail.strDrink,
+        strInstructions: cocktail.strInstructions,
+        strDrinkThumb: cocktail.strDrinkThumb,
+      },
+      choices: [...choices, cocktail.strDrink],
+      answer: cocktail.strDrink,
+    });
+  }
+
+  return quizQuestions;
+}
+
+function getRandomCocktails(drinks: any[], count: number): any[] {
+  const randomIndices: number[] = [];
+  const randomCocktails = [];
+
+  while (randomIndices.length < count) {
+    const randomIndex = Math.floor(Math.random() * drinks.length);
+    if (!randomIndices.includes(randomIndex)) {
+      // 중복 체크
+      randomIndices.push(randomIndex);
+      randomCocktails.push(drinks[randomIndex].strDrink);
+    }
+  }
+
+  return randomCocktails; // 랜덤 칵테일 배열 반환
 }
