@@ -13,6 +13,12 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
   const [alcoholicOps, setAlcoholicOps] = useState<string>('All');
   const [alcoholFilteredList, setAlcoholFilteredList] =
     useState<cocktailListType[]>(wholeCocktails);
+
+  //디버깅
+  useEffect(() => {
+    console.log('알코올 필터링 변경', alcoholFilteredList);
+  }, [alcoholFilteredList]);
+
   //알코올 필터링
   useEffect(() => {
     setAlcoholFilteredList(() => {
@@ -31,14 +37,12 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
           cocktail.strAlcoholic === 'Optional alcohol'
       );
       setAlcoholFilteredList(() => newCocktailList);
-      console.log('알코올 필터링 결과', alcoholFilteredList);
       return;
     }
     setAlcoholFilteredList(() => {
       const cocktailListNonOps = [...wholeCocktails];
       return cocktailListNonOps;
     });
-    console.log('알코올 필터링 미적용(All)', alcoholFilteredList);
   };
 
   return (

@@ -19,6 +19,11 @@ function Checkbox({
 }: checkBoxPropsType) {
   const [isChecked, setIsChecked] = useState<string[]>(Object.values(CATEGORY));
 
+  // 디버깅
+  useEffect(() => {
+    console.log('isChecked 변경', isChecked);
+  }, [isChecked]);
+
   // 카테고리 체크박스에서 체크 이벤트가 발생했을 때 isChecked 목록 변경
   const handleIsChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
@@ -30,11 +35,6 @@ function Checkbox({
     const subIsChecked = isChecked.filter((category) => category !== value);
     setIsChecked(() => subIsChecked);
   };
-
-  // 디버깅
-  useEffect(() => {
-    console.log('isChecked 변경', isChecked);
-  }, [isChecked]);
 
   // 단일 체크박스 상태가 변경된 경우 (x)
   useEffect(() => {
