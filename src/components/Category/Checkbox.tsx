@@ -17,38 +17,56 @@ function Checkbox({
   setIsCheckedAll,
   alcoholFilteredList,
 }: checkBoxPropsType) {
-  const [isChecked, setIsChecked] = useState<string[]>([]);
+  const [isChecked, setIsChecked] = useState<string[]>(Object.values(CATEGORY));
 
-  //카테고리 체크박스에서 체크 이벤트가 발생했을 때 isChecked 목록 변경
+  // 카테고리 체크박스에서 체크 이벤트가 발생했을 때 isChecked 목록 변경
   const handleIsChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
     if (checked) {
-      setIsChecked((current) => [...current, value]);
-      console.log('단일 카테고리 체크 목록', isChecked);
+      const addIsChecked = [...isChecked, value];
+      setIsChecked(() => addIsChecked);
       return;
     }
-    setIsChecked((current) => {
-      const newIsChecked = current.filter((category) => category !== value);
-      return newIsChecked;
-    });
-
-    console.log('단일 카테고리 체크 목록', isChecked);
+    const subIsChecked = isChecked.filter((category) => category !== value);
+    setIsChecked(() => subIsChecked);
   };
 
+  // 디버깅
   useEffect(() => {
-    isChecked.length === Object.values(CATEGORY).length &&
-      setIsCheckedAll(() => true);
+    console.log('isChecked 변경', isChecked);
   }, [isChecked]);
 
+  // 단일 체크박스 상태가 변경된 경우 (x)
   useEffect(() => {
-    isCheckedAll && setIsChecked(() => Object.values(CATEGORY));
-    !isCheckedAll && setIsChecked(() => []);
+    const categories = Object.values(CATEGORY);
+    if (isCheckedAll && isChecked.length === categories.length - 1) {
+      setIsCheckedAll(() => false);
+    }
+    if (isChecked.length !== categories.length) {
+      setIsCheckedAll(() => false);
+    }
+  }, [isChecked]);
+
+  // All 체크박스 상태가 변경된 경우
+  useEffect(() => {
+    const categories = Object.values(CATEGORY);
+    if (!isCheckedAll && isChecked.length === categories.length) {
+      return setIsChecked(() => []);
+    }
+    if (!isCheckedAll && isChecked.length !== categories.length) {
+      return;
+    }
+    const newIsChecked = [...categories];
+    setIsChecked((prev) => {
+      return prev.length !== categories.length ? newIsChecked : prev;
+    });
+    return;
   }, [isCheckedAll]);
 
   return (
     <>
       {Object.values(CATEGORY).map((category, idx) => (
-        <label key={idx + 1}>
+        <label key={idx + 1} style={{ display: 'flex' }}>
           <input
             type="checkbox"
             className="category"
