@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import Description from "./Description";
 import styles from "./Information.module.scss";
+import { useImgLoadStatus } from "../../hooks/useImgLoadStatus";
 
 function Information({ random }: any) {
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const isImgLoaded = useImgLoadStatus(imgRef);
+
   return (
     random && (
       <section className={styles.section}>
@@ -12,10 +17,13 @@ function Information({ random }: any) {
             alt="cocktail"
             src={random.strDrinkThumb}
             className={styles.image}
+            ref={imgRef}
           />
         </div>
 
-        <Description name={random.strDrink} cocktailId={random.idDrink} />
+        {isImgLoaded && (
+          <Description name={random.strDrink} cocktailId={random.idDrink} />
+        )}
       </section>
     )
   );
