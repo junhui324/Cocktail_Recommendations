@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getWholeCocktailUsingAlphabet } from '../../API/CocktailAPI';
-import AlcoholicOps from './AlcoholicOps';
+import Search from './Search';
 
 interface cocktailListType {
   [key: string]: string;
@@ -31,7 +31,7 @@ function Contents() {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-      <AlcoholicOps wholeCocktails={wholeCocktails} />
+      <Search wholeCocktails={wholeCocktails} />
     </div>
   );
 }
