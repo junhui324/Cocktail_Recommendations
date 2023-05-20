@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
-interface paginationPropsType {
+interface PaginationProps {
   totalPages: number;
   currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  handlePageQueryChange: (targetPageNumber: number) => void;
 }
 
 function Pagination({
   totalPages,
   currentPage,
-  setCurrentPage,
-}: paginationPropsType) {
+  handlePageQueryChange,
+}: PaginationProps) {
   const pageNumbers = Array.from(
     { length: totalPages },
     (_, index) => index + 1
@@ -24,49 +24,41 @@ function Pagination({
 
   const handlePreviousPageClick = () => {
     if (currentPage > 1) {
-      setCurrentPage(() => currentPage - 1);
+      handlePageQueryChange(currentPage - 1);
     }
   };
 
-  const handlePageClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    pageNumber: number
-  ) => {
-    e.preventDefault();
-    setCurrentPage(() => pageNumber);
+  const handlePageClick = (pageNumber: number) => {
+    handlePageQueryChange(pageNumber);
   };
 
   const handleNextPageClick = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(() => currentPage + 1);
+      handlePageQueryChange(currentPage + 1);
     }
   };
 
   return (
-    <>
-      <div>
-        <button onClick={handlePreviousPageClick}>이전</button>
-        {pageNumbers.map((pageNumber) =>
-          currentPage === pageNumber ? (
-            <span key={pageNumber} style={{ margin: 5 }}>
-              {pageNumber}
-            </span>
-          ) : (
-            <NavLink
-              to={
-                pageNumber !== 1 ? `/category/page/${pageNumber}` : `/category`
-              }
-              key={pageNumber}
-              onClick={(e) => handlePageClick(e, pageNumber)}
-              style={{ margin: 5 }}
-            >
-              {pageNumber}
-            </NavLink>
-          )
-        )}
-        <button onClick={handleNextPageClick}>다음</button>
-      </div>
-    </>
+    <div>
+      <button onClick={handlePreviousPageClick}>이전</button>
+      {pageNumbers.map((pageNumber) =>
+        currentPage === pageNumber ? (
+          <span key={pageNumber} style={{ margin: 5 }}>
+            {pageNumber}
+          </span>
+        ) : (
+          <NavLink
+            to={`?page=${pageNumber}`}
+            key={pageNumber}
+            onClick={() => handlePageClick(pageNumber)}
+            style={{ margin: 5 }}
+          >
+            {pageNumber}
+          </NavLink>
+        )
+      )}
+      <button onClick={handleNextPageClick}>다음</button>
+    </div>
   );
 }
 
