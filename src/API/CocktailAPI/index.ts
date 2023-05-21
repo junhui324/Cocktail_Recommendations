@@ -57,7 +57,7 @@ export async function getAlcoholState() {
  * 알파벳을 이용하여 전체 칵테일 정보를 반환하는 API 통신을 진행하는 함수
  * @returns 전체 칵테일 정보를 담고 있는 배열
  */
-async function getWholeCocktailUsingAlphabet() {
+export async function getWholeCocktailUsingAlphabet() {
   let wholeCocktail: any[] = [];
 
   const alphabet = [
@@ -178,6 +178,115 @@ async function makeRandomCocktailWithOption(filteredCocktail: any) {
   return filteredCocktail[randomIndex];
 }
 
+function getRandomCocktails(drinks: any[], count: number): any[] {
+  const randomIndices: number[] = [];
+  const randomCocktails = [];
+
+  while (randomIndices.length < count) {
+    const randomIndex = Math.floor(Math.random() * drinks.length);
+    if (!randomIndices.includes(randomIndex)) {
+      // 중복 체크
+      randomIndices.push(randomIndex);
+      randomCocktails.push(drinks[randomIndex].strDrink);
+    }
+  }
+
+  return randomCocktails; // 랜덤 칵테일 배열 반환
+}
+/**
+ * glass 옵션으로 칵테일 받아오기 - 날씨 관련
+ */
+async function getCocktailWithWeather(mainWeather: string) {
+  const weatherToDrinkMap = new Map<string, string>([
+    ["Thunderstorm", "Coffee_mug"],
+    ["Tornado", "Coffee_mug"],
+    ["Rain", "Coffee_mug"],
+    ["Squall", "Coffee_mug"],
+    ["Drizzle", "Collins_glass"],
+    ["Mist", "Collins_glass"],
+    ["Smoke", "Collins_glass"],
+    ["Fog", "Collins_glass"],
+    ["Haze", "Collins_glass"],
+    ["Snow", "Irish_coffee_cup"],
+    ["Clear", "Cocktail_glass"],
+    ["Clouds", "Highball_glass"],
+    ["Dust", "Highball_glass"],
+    ["Sand", "Highball_glass"],
+    ["Ash", "Highball_glass"],
+  ]);
+
+  try {
+    const glassOption = weatherToDrinkMap.get(mainWeather);
+    if (glassOption) {
+      const res = await fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=${glassOption}`
+      );
+      const response = await res.json();
+      return response.drinks;
+    }
+  } catch (err) {
+    throw new Error("Glass 옵션 칵테일 API 통신 에러");
+  }
+}
+
+export { getCocktailWithWeather };
+/**
+ * 해당 칵테일의 모든 정보를 반환하는 함수
+ * @param id 칵테일 id
+ * @returns 칵테일 상세정보
+ */
+export async function getCocktailDescription(id: number) {
+  const drink = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+  )
+    .then((res) => res.json())
+    .then((data) => data.drinks[0])
+    .catch((e) => console.log("Error: ", e));
+
+  return drink;
+}
+
+/**
+ * 해당 칵테일에 들어가는 재료 및 재료량을 반환하는 함수
+ * @param id 칵테일 id
+ * @returns 칵테일 재료, 재료량
+ */
+export async function getCocktailIngredients(id: number) {
+  const drink = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+  )
+    .then((res) => res.json())
+    .then((data) => data.drinks[0])
+    .catch((e) => console.log("Error: ", e));
+
+  const ingredients = [];
+  const measures = [];
+
+  for (let i = 1; i <= 15; i++) {
+    const ingredient = drink[`strIngredient${i}`];
+    const measure = drink[`strMeasure${i}`];
+
+    if (ingredient) {
+      ingredients.push(ingredient);
+      measures.push(measure);
+    }
+  }
+  return { ingredients, measures };
+}
+
+/**
+ * 해당 재료의 이미지를 반환하는 함수
+ * @param name 재료 name
+ * @returns 재료 이미지
+ */
+export async function getIngredientImg(name: string) {
+  const img = await fetch(
+    `https://www.thecocktaildb.com/images/ingredients/${name}-Medium.png`
+  ).then((data) => data.url);
+
+  return img;
+}
+
 export type QuizQuestion = {
   id: string; // 고유한 질문 ID
   cocktail: {
@@ -211,20 +320,4 @@ export async function fetchQuestions(): Promise<QuizQuestion[]> {
   }
 
   return quizQuestions;
-}
-
-function getRandomCocktails(drinks: any[], count: number): any[] {
-  const randomIndices: number[] = [];
-  const randomCocktails = [];
-
-  while (randomIndices.length < count) {
-    const randomIndex = Math.floor(Math.random() * drinks.length);
-    if (!randomIndices.includes(randomIndex)) {
-      // 중복 체크
-      randomIndices.push(randomIndex);
-      randomCocktails.push(drinks[randomIndex].strDrink);
-    }
-  }
-
-  return randomCocktails; // 랜덤 칵테일 배열 반환
 }
