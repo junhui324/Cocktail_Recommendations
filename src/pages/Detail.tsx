@@ -6,8 +6,6 @@ function Detail() {
   return (
     <Layout>
       <div>
-        {/* <h1>Margarita</h1> */}
-
         <Description />
       </div>
     </Layout>

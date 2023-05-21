@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { getCocktailIngredients } from '../../API/CocktailAPI';
+import { useParams } from 'react-router-dom';
+import {
+  getCocktailIngredients,
+  getIngredientImg,
+} from '../../API/CocktailAPI';
 
 function Ingredients() {
-  const [ingredients, setIngredients] = useState<any>([]);
-  const [measures, setMeasures] = useState<any>([]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
+  const [measures, setMeasures] = useState<string[]>([]);
+  const [ingredientImgs, setIngredientImgs] = useState<string[]>([]);
+  const { id } = useParams();
 
   useEffect(() => {
     async function getIngredients() {
-      const { ingredients, measures } = await getCocktailIngredients();
+      const { ingredients, measures } = await getCocktailIngredients(
+        Number(id)
+      );
       setIngredients(ingredients);
       setMeasures(measures);
+
+      const imgsPromises = ingredients.map((ingredient) =>
+        getIngredientImg(ingredient)
+      );
+      // console.log(imgsPromises);
+      const imgsUrls = await Promise.all(imgsPromises);
+      setIngredientImgs(imgsUrls);
     }
     getIngredients();
   }, []);
@@ -17,15 +32,18 @@ function Ingredients() {
   return (
     <>
       <h3>Ingredients</h3>
-      <ul>
-        {ingredients.map((ingredient: any, index: number) => {
+      <div>
+        {ingredients.map((ingredient: string, index: number) => {
+          const ingredientImg = ingredientImgs[index];
+
           return (
-            <li key={index}>
+            <span key={index}>
+              {ingredientImg && <img src={ingredientImg} alt={ingredient} />}
               {measures[index]} {ingredient}
-            </li>
+            </span>
           );
         })}
-      </ul>
+      </div>
     </>
   );
 }
