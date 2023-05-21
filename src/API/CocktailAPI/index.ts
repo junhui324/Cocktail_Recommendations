@@ -193,6 +193,7 @@ function getRandomCocktails(drinks: any[], count: number): any[] {
 
   return randomCocktails; // 랜덤 칵테일 배열 반환
 }
+
 /**
  * glass 옵션으로 칵테일 받아오기 - 날씨 관련
  */
@@ -225,7 +226,7 @@ async function getCocktailWithWeather(mainWeather: string) {
       return response.drinks;
     }
   } catch (err) {
-    throw new Error("Glass 옵션 칵테일 API 통신 에러");
+    throw new Error('Glass 옵션 칵테일 API 통신 에러');
   }
 }
 
@@ -241,7 +242,7 @@ export async function getCocktailDescription(id: number) {
   )
     .then((res) => res.json())
     .then((data) => data.drinks[0])
-    .catch((e) => console.log("Error: ", e));
+    .catch((e) => console.log('Error: ', e));
 
   return drink;
 }
@@ -257,7 +258,7 @@ export async function getCocktailIngredients(id: number) {
   )
     .then((res) => res.json())
     .then((data) => data.drinks[0])
-    .catch((e) => console.log("Error: ", e));
+    .catch((e) => console.log('Error: ', e));
 
   const ingredients = [];
   const measures = [];
