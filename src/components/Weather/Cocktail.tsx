@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getCocktailWithWeather } from '../../API/CocktailAPI/index';
-
+import styles from './Cocktail.module.scss';
 type Drink = {
   idDrink: string;
   strDrink: string;
@@ -29,16 +29,16 @@ export function Cocktail({ mainWeather }: CocktailProps) {
   }, [mainWeather]);
 
   return (
-    <div>
+    <div className={styles.cocktail}>
       {cocktail.map((drink) => (
-        <span key={drink.idDrink}>
+        <div key={drink.idDrink}>
           {drink.strDrink}
           <img
             src={drink.strDrinkThumb}
             alt="drink img"
             style={{ width: 300, height: 300 }}
           ></img>
-        </span>
+        </div>
       ))}
     </div>
   );

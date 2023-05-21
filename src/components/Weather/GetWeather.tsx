@@ -5,6 +5,10 @@ import { Cocktail } from './Cocktail';
 import { useSelector, Provider } from 'react-redux';
 import { RootState, store } from '../../store/store';
 
+import { SearchAddress } from './SearchAddress';
+
+import styles from './Weather.module.scss';
+
 type WeatherData = {
   name: string;
   main: {
@@ -64,7 +68,7 @@ function GetWeather() {
   return (
     <Provider store={store}>
       <div>
-        <div>
+        <div className={styles.title}>
           <h1>
             날씨가 {description}일 때 어울리는 칵테일{' '}
             <img src={iconUrl} alt="Weather Icon"></img>
@@ -77,6 +81,10 @@ function GetWeather() {
           <p>현재 지역 : {name}</p>
           <p>온도 : {temperature}</p>
           <p>날씨 : {description}</p>
+        </div>
+
+        <div>
+          <SearchAddress></SearchAddress>
         </div>
 
         <div>

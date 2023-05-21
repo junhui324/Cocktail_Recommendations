@@ -4,6 +4,7 @@ import { GeocoderAPI } from '../../API/WeatherAPI/index';
 import { useDispatch, Provider } from 'react-redux';
 import { setCoordinates } from '../../store/coordinatesSlice';
 import { RootState, store } from '../../store/store';
+import styles from './SearchAddress.module.scss';
 
 export function SearchAddress(): JSX.Element {
   const [openPostcode, setOpenPostcode] = useState<boolean>(false);
@@ -53,7 +54,7 @@ export function SearchAddress(): JSX.Element {
 
   return (
     <Provider store={store}>
-      <div>
+      <div className={styles.searchAddress}>
         <p>주소 검색</p>
         <button onClick={handleSearchAddressButton.clickButton}>
           주소 검색
