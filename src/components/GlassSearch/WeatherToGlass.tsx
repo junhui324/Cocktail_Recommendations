@@ -4,12 +4,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Landing.module.scss'
 
-interface Cocktail {
-  idDrink: string;
-  strDrink: string;
-  strDrinkThumb: string;
-}
-
 const weatherToGlass = {
   'Thunderstorm': 'Coffee_mug',
   'Tornado': 'Coffee_mug',
@@ -28,7 +22,18 @@ const weatherToGlass = {
   'Ash': 'Highball_glass'
 };
 
-const CocktailList: React.FC<{ weather: keyof typeof weatherToGlass }> = ({ weather }) => {
+interface Cocktail {
+  idDrink: string;
+  strDrink: string;
+  strDrinkThumb: string;
+}
+
+interface Props {
+  weather: keyof typeof weatherToGlass;
+  onCocktailSelected?: (id: string) => void;
+}
+
+const CocktailList: React.FC<Props> =({ weather, onCocktailSelected }) => {
   const [cocktail, setCocktail] = useState<Cocktail | null>(null);
 
   useEffect(() => {
@@ -50,21 +55,25 @@ const CocktailList: React.FC<{ weather: keyof typeof weatherToGlass }> = ({ weat
           strDrink: selectedCocktail.strDrink, 
           strDrinkThumb: selectedCocktail.strDrinkThumb, 
         });
+        
+        // 선택된 칵테일의 ID를 상위 컴포넌트에 전달
+        if (typeof onCocktailSelected === 'function') {
+          onCocktailSelected(selectedCocktail.idDrink);
+        }
       } catch (err) {
         console.error(err);
       }
     };
-
     fetchCocktails();
-  }, [weather]);
+  }, [weather, onCocktailSelected]);
 
   if (!cocktail) {
-    return <div>칵테일 조리중...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <h4>{cocktail.strDrink}</h4>
+      <h4 className={styles.cocktailName}>{cocktail.strDrink}</h4>
       <img 
         src={cocktail.strDrinkThumb} 
         alt={cocktail.strDrink} 
@@ -75,4 +84,3 @@ const CocktailList: React.FC<{ weather: keyof typeof weatherToGlass }> = ({ weat
 };
 
 export default CocktailList;
-

@@ -5,14 +5,21 @@ import styles from "../components/GlassSearch/Landing.module.scss"
 import { useNavigate } from "react-router-dom";
 import { fetchWeatherData, getLocation } from '../API/WeatherAPI/index';
 
-
 function Landing() {
   const navigate = useNavigate();
   
   // 추천받은 칵테일 상세 페이지로 넘어가기
+  const [selectedCocktailId, setSelectedCocktailId] = useState<string | null>(null);
+  console.log('랜덤 칵테일 id:', selectedCocktailId)
+
   const handleButtonClickForDetail = () => {
-    navigate('/detail');
-  }
+    if (selectedCocktailId) {
+      navigate(`/detail/${selectedCocktailId}`);
+    } else {
+      console.warn("칵테일 상세 페이지로 이동 중 에러 발생");
+    }
+  };
+  
   
   // 다시 추천받기 기능
   const [reloadKey, setReloadKey] = useState(0); 
@@ -52,7 +59,7 @@ function Landing() {
   }, []);
 
   if (!weather) {
-    return <div>날씨에 어울리는칵테일 조리중...</div>;
+    return <div className={styles.loadingPg}>날씨에 어울리는 칵테일 제조중...</div>;
   }
 
   const { name, main, weather: weatherDetails } = weather;
@@ -72,17 +79,28 @@ function Landing() {
         <h3>현재 당신이 계신 곳은..</h3>
         <h3>{name}</h3>
         <p>날씨 : {description} | {temperature} </p>
-        <img src={iconUrl} alt="Weather Icon"></img>
-
-        <h3>날씨 '{description}'에 어울리는 칵테일은..</h3>
+        
+        <div className={styles.weatherIcons}>
+          <img src={iconUrl} alt="Weather Icon" className={styles.weatherIcon}></img>
+          <img src={iconUrl} alt="Weather Icon" className={styles.weatherIcon}></img>
+          <img src={iconUrl} alt="Weather Icon" className={styles.weatherIcon}></img>
+        </div>
+        <h3>[{description}] 날씨에 어울리는 칵테일은..</h3>
 
         <CocktailList 
           weather={weatherName}
-          key={reloadKey}/> 
-        <button 
-          onClick={handleButtonClickForDetail}
-          className={styles.toDetailPagebtn}>추천 칵테일에 대해 더 알아보기</button>
-        <button onClick={handleButtonClickForReload}>다시 추천받기</button>
+          key={reloadKey}
+          onCocktailSelected={setSelectedCocktailId}
+          /> 
+
+        <div className={styles.buttonBox}>
+          <button 
+            onClick={handleButtonClickForDetail}
+            className={styles.learnBtn}>추천 칵테일에 대해 더 알아보기</button>
+          <button 
+            onClick={handleButtonClickForReload}
+            className={styles.againBtn}>다시 추천받기</button>
+        </div>
       </div>
     </Layout>
   );
