@@ -18,7 +18,7 @@ function App() {
         <Route path="/random" element={<Random />} />
         <Route path="/game" element={<Game />} />
         <Route path="/weather" element={<Weather />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </BrowserRouter>
   );
