@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import isCheckedReducer from './isCheckedSlice';
+import searchResultsReducer from './searchResultsSlice';
 
 const CategoryStore = configureStore({
   reducer: {
     isChecked: isCheckedReducer,
+    searchResults: searchResultsReducer,
   },
 });
 
