@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getCocktailDescription } from '../../API/CocktailAPI';
 import Ingredients from './Ingredients';
 
 function Description() {
   const [drink, setDrink] = useState<any>({});
-  // const ingre = await getCocktailIngredients();
-  // console.log(ingre);
+  const { id } = useParams();
 
   useEffect(() => {
     async function getDescription() {
-      const data = await getCocktailDescription();
+      const data = await getCocktailDescription(Number(id));
       setDrink(data);
     }
     getDescription();
