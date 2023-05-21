@@ -57,7 +57,7 @@ export async function getAlcoholState() {
  * 알파벳을 이용하여 전체 칵테일 정보를 반환하는 API 통신을 진행하는 함수
  * @returns 전체 칵테일 정보를 담고 있는 배열
  */
-async function getWholeCocktailUsingAlphabet() {
+export async function getWholeCocktailUsingAlphabet() {
   let wholeCocktail: any[] = [];
 
   const alphabet = [
