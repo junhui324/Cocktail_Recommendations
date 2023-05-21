@@ -215,3 +215,55 @@ async function getCocktailWithWeather(mainWeather: string) {
 }
 
 export { getCocktailWithWeather };
+
+/*
+ * 해당 칵테일의 모든 정보를 반환하는 함수
+ * @param id 칵테일 id
+ * @returns 칵테일 상세정보
+ */
+// export async function getCocktailDescription(id: number) {
+export async function getCocktailDescription() {
+  const drink = await fetch(
+    // `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`
+  )
+    .then((res) => res.json())
+    .then((data) => data.drinks[0])
+    .catch((e) => console.log('Error: ', e));
+
+  return drink;
+}
+
+/**
+ * 해당 칵테일에 들어가는 재료 및 재료량을 반환하는 함수
+ * @param id 칵테일 id
+ * @returns 칵테일 재료, 재료량
+ */
+export async function getCocktailIngredients() {
+  const drink = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`
+  )
+    .then((res) => res.json())
+    .then((data) => data.drinks[0])
+    .catch((e) => console.log('Error: ', e));
+
+  const ingredients = [];
+  const measures = [];
+
+  for (let i = 1; i <= 15; i++) {
+    const ingredient = drink[`strIngredient${i}`];
+    const measure = drink[`strMeasure${i}`];
+
+    if (ingredient) {
+      ingredients.push(ingredient);
+      measures.push(measure);
+    }
+  }
+  return { ingredients, measures };
+}
+
+/**
+ * 해당 재료의 이미지를 반환하는 함수
+ * @param name 재료 name
+ * @returns 재료 이미지
+ */
