@@ -57,7 +57,7 @@ export async function getAlcoholState() {
  * 알파벳을 이용하여 전체 칵테일 정보를 반환하는 API 통신을 진행하는 함수
  * @returns 전체 칵테일 정보를 담고 있는 배열
  */
-async function getWholeCocktailUsingAlphabet() {
+export async function getWholeCocktailUsingAlphabet() {
   let wholeCocktail: any[] = [];
 
   const alphabet = [
@@ -221,11 +221,9 @@ export { getCocktailWithWeather };
  * @param id 칵테일 id
  * @returns 칵테일 상세정보
  */
-// export async function getCocktailDescription(id: number) {
-export async function getCocktailDescription() {
+export async function getCocktailDescription(id: number) {
   const drink = await fetch(
-    // `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
-    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`
+    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
   )
     .then((res) => res.json())
     .then((data) => data.drinks[0])
@@ -239,9 +237,9 @@ export async function getCocktailDescription() {
  * @param id 칵테일 id
  * @returns 칵테일 재료, 재료량
  */
-export async function getCocktailIngredients() {
+export async function getCocktailIngredients(id: number) {
   const drink = await fetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`
+    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
   )
     .then((res) => res.json())
     .then((data) => data.drinks[0])
@@ -267,3 +265,10 @@ export async function getCocktailIngredients() {
  * @param name 재료 name
  * @returns 재료 이미지
  */
+export async function getIngredientImg(name: string) {
+  const img = await fetch(
+    `https://www.thecocktaildb.com/images/ingredients/${name}-Medium.png`
+  ).then((data) => data.url);
+
+  return img;
+}
