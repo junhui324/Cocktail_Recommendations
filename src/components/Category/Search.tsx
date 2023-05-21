@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AlcoholicOps from './AlcoholicOps';
+import styles from './Search.module.scss';
 
 type cocktailListType = {
   [key: string]: string;
@@ -47,7 +48,7 @@ function Search({ wholeCocktails }: searchPropsType) {
 
   return (
     <>
-      <form onSubmit={handleSubmitQuery}>
+      <form className={styles.searchContainer} onSubmit={handleSubmitQuery}>
         <input
           type="text"
           name="searchQuery"
