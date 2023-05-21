@@ -1,4 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
+import { RootState } from '../../store/store';
+import { useSelector } from 'react-redux';
 import CheckboxAll from './CheckboxAll';
 import CocktailList from './CocktailList';
 
@@ -6,16 +8,13 @@ type cocktailListType = {
   [key: string]: string;
 };
 
-interface alcoholicOpsPropsType {
-  wholeCocktails: cocktailListType[];
-}
-
 export const AlcoholFilteredListContext = createContext<cocktailListType[]>([]);
 
-function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
+function AlcoholicOps() {
+  const searchResults = useSelector((state: RootState) => state.searchResults);
   const [alcoholicOps, setAlcoholicOps] = useState<string>('All');
   const [alcoholFilteredList, setAlcoholFilteredList] =
-    useState<cocktailListType[]>(wholeCocktails);
+    useState<cocktailListType[]>(searchResults);
 
   //디버깅
   useEffect(() => {
@@ -26,13 +25,13 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
   //알코올 필터링
   useEffect(() => {
     setAlcoholFilteredList(() => {
-      return wholeCocktails;
+      return searchResults;
     });
-  }, [wholeCocktails]);
+  }, [searchResults]);
 
   useEffect(() => {
     if (alcoholicOps !== 'All') {
-      const newCocktailList = wholeCocktails.filter(
+      const newCocktailList = searchResults.filter(
         (cocktail) =>
           cocktail.strAlcoholic === alcoholicOps ||
           cocktail.strAlcoholic === 'Optional alcohol'
@@ -41,7 +40,7 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
       return;
     }
     setAlcoholFilteredList(() => {
-      const cocktailListNonOps = [...wholeCocktails];
+      const cocktailListNonOps = [...searchResults];
       return cocktailListNonOps;
     });
   }, [alcoholicOps]);
@@ -53,7 +52,7 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
 
   return (
     <>
-      <div style={{ display: 'flex', alignItems: 'flex-start', margin: 0 }}>
+      <div>
         <button className="filter" value="All" onClick={handleOnClick}>
           All
         </button>

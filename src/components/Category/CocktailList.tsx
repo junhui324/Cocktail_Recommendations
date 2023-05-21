@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AlcoholFilteredListContext } from './AlcoholicOps';
-import { RootState } from '../../store/CategoryStore';
+import { RootState } from '../../store/store';
 import Pagination from './Pagination';
 import styles from './CocktailList.module.scss';
 import { useSelector } from 'react-redux';
@@ -58,25 +58,23 @@ function CocktailList() {
       <p className={styles.cocktailContainer}>
         {currentPageCocktails.length !== 0 ? (
           currentPageCocktails.map((cocktail, idx) => (
-            <section key={idx}>
-              <div>
-                <NavLink to={`/detail/${cocktail.idDrink}`}>
-                  <img
-                    src={cocktail.strDrinkThumb}
-                    alt={cocktail.strDrink}
-                    style={{
-                      margin: 0,
-                      width: 250,
-                      height: 250,
-                      display: 'flex',
-                    }}
-                  />
-                </NavLink>
-                <NavLink to={`/detail/${cocktail.idDrink}`}>
-                  {cocktail.strDrink}
-                </NavLink>
-              </div>
-            </section>
+            <div key={idx}>
+              <NavLink to={`/detail/${cocktail.idDrink}`}>
+                <img
+                  src={cocktail.strDrinkThumb}
+                  alt={cocktail.strDrink}
+                  style={{
+                    margin: 0,
+                    width: 250,
+                    height: 250,
+                    display: 'flex',
+                  }}
+                />
+              </NavLink>
+              <NavLink to={`/detail/${cocktail.idDrink}`}>
+                {cocktail.strDrink}
+              </NavLink>
+            </div>
           ))
         ) : (
           <div>설정된 카테고리에 해당하는 칵테일이 없습니다.</div>
