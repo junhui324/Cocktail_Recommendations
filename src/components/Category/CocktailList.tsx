@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { AlcoholFilteredListContext } from './AlcoholicOps';
+import { RootState } from '../../store/CategoryStore';
 import Pagination from './Pagination';
+import styles from './CocktailList.module.scss';
+import { useSelector } from 'react-redux';
 
 interface cocktailListType {
   [key: string]: string;
 }
 
-interface cocktailListPropsType {
-  alcoholFilteredList: cocktailListType[];
-  isChecked: string[];
-}
-
-function CocktailList({
-  alcoholFilteredList,
-  isChecked,
-}: cocktailListPropsType) {
+function CocktailList() {
+  const alcoholFilteredList = useContext(AlcoholFilteredListContext);
+  const isChecked = useSelector((state: RootState) => state.isChecked);
   const [cocktailList, setCocktailList] = useState<cocktailListType[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -57,7 +55,7 @@ function CocktailList({
 
   return (
     <>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <p className={styles.cocktailContainer}>
         {currentPageCocktails.length !== 0 ? (
           currentPageCocktails.map((cocktail, idx) => (
             <section key={idx}>
@@ -83,7 +81,7 @@ function CocktailList({
         ) : (
           <div>설정된 카테고리에 해당하는 칵테일이 없습니다.</div>
         )}
-      </div>
+      </p>
 
       {currentPageCocktails.length !== 0 && (
         <Pagination

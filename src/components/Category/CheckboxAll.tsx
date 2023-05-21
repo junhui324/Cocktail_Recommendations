@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Checkbox from './Checkbox';
+import styles from './CheckboxAll.module.scss';
 
-interface cocktailListType {
-  [key: string]: string;
-}
-
-interface checkboxAllPropsType {
-  alcoholFilteredList: cocktailListType[];
-}
-
-function CheckboxAll({ alcoholFilteredList }: checkboxAllPropsType) {
+function CheckboxAll() {
   const [isCheckedAll, setIsCheckedAll] = useState<boolean>(true);
 
   //디버깅
@@ -23,24 +16,25 @@ function CheckboxAll({ alcoholFilteredList }: checkboxAllPropsType) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <label key={0} style={{ display: 'flex' }}>
-        <input
-          type="checkbox"
-          className="category"
-          checked={isCheckedAll}
-          value="All"
-          onChange={handleIsCheckedAll}
-          style={{ display: 'flex' }}
+    <>
+      <div className={styles.checkboxContainer}>
+        <label key={0} style={{ display: 'flex' }}>
+          <input
+            type="checkbox"
+            className="category"
+            checked={isCheckedAll}
+            value="All"
+            onChange={handleIsCheckedAll}
+            style={{ display: 'flex' }}
+          />
+          All
+        </label>
+        <Checkbox
+          isCheckedAll={isCheckedAll}
+          setIsCheckedAll={setIsCheckedAll}
         />
-        All
-      </label>
-      <Checkbox
-        isCheckedAll={isCheckedAll}
-        setIsCheckedAll={setIsCheckedAll}
-        alcoholFilteredList={alcoholFilteredList}
-      />
-    </div>
+      </div>
+    </>
   );
 }
 

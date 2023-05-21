@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import CATEGORY from './Constant';
-import CocktailList from './CocktailList';
-
-interface cocktailListType {
-  [key: string]: string;
-}
+import { RootState, AppDispatch } from '../../store/CategoryStore';
+import { setIsChecked } from '../../store/isCheckedSlice';
+import styles from './Checkbox.module.scss';
 
 interface checkBoxPropsType {
   isCheckedAll: boolean;
   setIsCheckedAll: React.Dispatch<React.SetStateAction<boolean>>;
-  alcoholFilteredList: cocktailListType[];
 }
 
-function Checkbox({
-  isCheckedAll,
-  setIsCheckedAll,
-  alcoholFilteredList,
-}: checkBoxPropsType) {
-  const [isChecked, setIsChecked] = useState<string[]>(Object.values(CATEGORY));
+function Checkbox({ isCheckedAll, setIsCheckedAll }: checkBoxPropsType) {
+  const isChecked = useSelector((state: RootState) => state.isChecked);
+  const dispatch = useDispatch<AppDispatch>();
 
   // 디버깅
   useEffect(() => {
@@ -29,14 +24,16 @@ function Checkbox({
     const { value, checked } = e.target;
     if (checked) {
       const addIsChecked = [...isChecked, value];
-      setIsChecked(() => addIsChecked);
+      dispatch(setIsChecked(addIsChecked));
+      // setIsChecked(() => addIsChecked);
       return;
     }
     const subIsChecked = isChecked.filter((category) => category !== value);
-    setIsChecked(() => subIsChecked);
+    // setIsChecked(() => subIsChecked);
+    dispatch(setIsChecked(subIsChecked));
   };
 
-  // 단일 체크박스 상태가 변경된 경우 (x)
+  // 단일 체크박스 상태가 변경된 경우
   useEffect(() => {
     const categories = Object.values(CATEGORY);
     if (isCheckedAll && isChecked.length === categories.length - 1) {
@@ -51,37 +48,37 @@ function Checkbox({
   useEffect(() => {
     const categories = Object.values(CATEGORY);
     if (!isCheckedAll && isChecked.length === categories.length) {
-      return setIsChecked(() => []);
+      // return setIsChecked(() => []);
+      dispatch(setIsChecked([]));
+      return;
     }
     if (!isCheckedAll && isChecked.length !== categories.length) {
       return;
     }
-    const newIsChecked = [...categories];
-    setIsChecked((prev) => {
-      return prev.length !== categories.length ? newIsChecked : prev;
-    });
+    const allCheckboxOps = [...categories];
+    const newIsChecked =
+      isChecked.length !== categories.length ? allCheckboxOps : isChecked;
+    dispatch(setIsChecked(newIsChecked));
     return;
   }, [isCheckedAll]);
 
   return (
     <>
-      {Object.values(CATEGORY).map((category, idx) => (
-        <label key={idx + 1} style={{ display: 'flex' }}>
-          <input
-            type="checkbox"
-            className="category"
-            checked={isChecked.includes(category)}
-            value={category}
-            onChange={handleIsChecked}
-            style={{ display: 'flex' }}
-          />
-          {category}
-        </label>
-      ))}
-      <CocktailList
-        isChecked={isChecked}
-        alcoholFilteredList={alcoholFilteredList}
-      />
+      <div className={styles.checkboxContainer}>
+        {Object.values(CATEGORY).map((category, idx) => (
+          <label key={idx + 1} style={{ display: 'flex' }}>
+            <input
+              type="checkbox"
+              className="category"
+              checked={isChecked.includes(category)}
+              value={category}
+              onChange={handleIsChecked}
+              style={{ display: 'flex' }}
+            />
+            {category}
+          </label>
+        ))}
+      </div>
     </>
   );
 }

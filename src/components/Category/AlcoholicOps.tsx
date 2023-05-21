@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import CheckboxAll from './CheckboxAll';
+import CocktailList from './CocktailList';
 
 type cocktailListType = {
   [key: string]: string;
@@ -8,6 +9,8 @@ type cocktailListType = {
 interface alcoholicOpsPropsType {
   wholeCocktails: cocktailListType[];
 }
+
+export const AlcoholFilteredListContext = createContext<cocktailListType[]>([]);
 
 function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
   const [alcoholicOps, setAlcoholicOps] = useState<string>('All');
@@ -65,7 +68,10 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
           Non-Alcoholic
         </button>
       </div>
-      <CheckboxAll alcoholFilteredList={alcoholFilteredList} />
+      <AlcoholFilteredListContext.Provider value={alcoholFilteredList}>
+        <CheckboxAll />
+        <CocktailList />
+      </AlcoholFilteredListContext.Provider>
     </>
   );
 }

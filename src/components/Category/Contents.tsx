@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import { getWholeCocktailUsingAlphabet } from '../../API/CocktailAPI';
 import Search from './Search';
 
 interface cocktailListType {
   [key: string]: string;
 }
+
+export const WholeCocktailsContext = createContext<cocktailListType[]>([]);
 
 function Contents() {
   const [wholeCocktails, setWholeCocktails] = useState<cocktailListType[]>([]);
