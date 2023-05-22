@@ -2,9 +2,9 @@ import React from 'react';
 
 import Header from './Header/Header';
 import Footer from './Footer';
-import styles from './Layout.module.scss';
+import styles from './CSLayout.module.scss';
 
-function Layout(props: { children: React.ReactNode }) {
+function CWLayout(props: { children: React.ReactNode }) {
   return (
     <div>
       <Header />
@@ -16,4 +16,4 @@ function Layout(props: { children: React.ReactNode }) {
   );
 }
 
-export default Layout;
+export default CWLayout;

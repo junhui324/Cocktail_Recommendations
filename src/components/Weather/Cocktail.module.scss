@@ -1,4 +1,51 @@
 .cocktail {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  grid-template-columns: repeat(4, 250px);
+
+  img {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.link {
+  color: #ecf2ff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+}
+
+.link:hover {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+  border-radius: 17px;
+
+  background: linear-gradient(-45deg, #33ccff 0%, #ff99cc 100%);
+
+  background-size: 400% 400%;
+  animation: gradient1 5s ease infinite;
+
+  letter-spacing: 1px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+@keyframes gradient1 {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

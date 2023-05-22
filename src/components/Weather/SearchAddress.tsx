@@ -55,7 +55,7 @@ export function SearchAddress(): JSX.Element {
   return (
     <Provider store={store}>
       <div className={styles.searchAddress}>
-        <p>주소 검색</p>
+        <h3>주소를 검색해서 해당 지역 날씨에 맞는 칵테일을 추천받아 보세요!</h3>
         <button onClick={handleSearchAddressButton.clickButton}>
           주소 검색
         </button>
