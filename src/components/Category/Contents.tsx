@@ -30,9 +30,9 @@ function Contents() {
   }, []);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+    <>
       <Search wholeCocktails={wholeCocktails} />
-    </div>
+    </>
   );
 }
 

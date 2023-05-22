@@ -52,16 +52,19 @@ function Search({ wholeCocktails }: searchPropsType) {
   };
 
   return (
-    <>
-      <form className={styles.searchContainer} onSubmit={handleSubmitQuery}>
+    <div className={styles.searchContainer}>
+      <form className={styles.searchBar} onSubmit={handleSubmitQuery}>
         <input
+          id={styles.inputBar}
           type="text"
           name="searchQuery"
           onChange={handleSearchInputChange}
         />
-        <button type="submit">검색</button>
+        <button id={styles.searchButton} type="submit">
+          검색
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 

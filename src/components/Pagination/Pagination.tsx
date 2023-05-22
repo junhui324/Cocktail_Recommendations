@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from './Pagination.module.scss';
 
 interface PaginationProps {
   totalPages: number;
@@ -39,7 +40,7 @@ function Pagination({
   };
 
   return (
-    <div>
+    <div className={styles.paginationBar}>
       <button onClick={handlePreviousPageClick}>이전</button>
       {pageNumbers.map((pageNumber) =>
         currentPage === pageNumber ? (

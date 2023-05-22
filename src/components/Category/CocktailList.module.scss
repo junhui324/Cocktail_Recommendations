@@ -1,5 +1,20 @@
 .cocktailContainer {
-  display: flex;
-  justify-content: flex-end;
+  position: relative;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(4, 250px);
   flex-wrap: wrap;
+
+  padding: 10px;
+}
+.cocktailImage {
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  height: 250px;
+}
+
+.cocktailName {
+  margin: 0;
+  padding: 5px;
 }

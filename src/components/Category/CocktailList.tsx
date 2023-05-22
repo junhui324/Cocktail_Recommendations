@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AlcoholFilteredListContext } from './AlcoholicOps';
 import { RootState } from '../../store/store';
-import Pagination from './Pagination';
+import Pagination from '../Pagination/Pagination';
 import styles from './CocktailList.module.scss';
 import { useSelector } from 'react-redux';
 
@@ -21,7 +21,7 @@ function CocktailList() {
   const queryParams = new URLSearchParams(location.search);
   const pageNumber = parseInt(queryParams.get('page') || '1');
 
-  const cocktailsPerPage = 30;
+  const cocktailsPerPage = 20;
   const totalPages = Math.ceil(cocktailList.length / cocktailsPerPage);
   const firstCocktailIdx = (currentPage - 1) * cocktailsPerPage;
   const lastCocktailIdx = firstCocktailIdx + cocktailsPerPage;
@@ -54,33 +54,28 @@ function CocktailList() {
   };
 
   return (
-    <>
-      <p className={styles.cocktailContainer}>
-        {currentPageCocktails.length !== 0 ? (
-          currentPageCocktails.map((cocktail, idx) => (
-            <div key={idx}>
-              <NavLink to={`/detail/${cocktail.idDrink}`}>
-                <img
-                  src={cocktail.strDrinkThumb}
-                  alt={cocktail.strDrink}
-                  style={{
-                    margin: 0,
-                    width: 250,
-                    height: 250,
-                    display: 'flex',
-                  }}
-                />
-              </NavLink>
+    <section className={styles.cocktailContainer}>
+      {currentPageCocktails.length !== 0 ? (
+        currentPageCocktails.map((cocktail, idx) => (
+          <div key={idx}>
+            <NavLink to={`/detail/${cocktail.idDrink}`}>
+              <img
+                className={styles.cocktailImage}
+                src={cocktail.strDrinkThumb}
+                alt={cocktail.strDrink}
+              />
+            </NavLink>
+
+            <p className={styles.cocktailName}>
               <NavLink to={`/detail/${cocktail.idDrink}`}>
                 {cocktail.strDrink}
               </NavLink>
-            </div>
-          ))
-        ) : (
-          <div>설정된 카테고리에 해당하는 칵테일이 없습니다.</div>
-        )}
-      </p>
-
+            </p>
+          </div>
+        ))
+      ) : (
+        <div>설정된 카테고리에 해당하는 칵테일이 없습니다.</div>
+      )}
       {currentPageCocktails.length !== 0 && (
         <Pagination
           totalPages={totalPages}
@@ -88,7 +83,7 @@ function CocktailList() {
           handlePageQueryChange={handlePageQueryChange}
         />
       )}
-    </>
+    </section>
   );
 }
 

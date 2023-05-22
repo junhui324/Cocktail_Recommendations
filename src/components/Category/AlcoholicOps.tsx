@@ -3,6 +3,7 @@ import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 import CheckboxAll from './CheckboxAll';
 import CocktailList from './CocktailList';
+import styles from './AlcoholicOps.module.scss';
 
 type cocktailListType = {
   [key: string]: string;
@@ -52,7 +53,7 @@ function AlcoholicOps() {
 
   return (
     <>
-      <div>
+      <div className={styles.alcoholicFilterContainer}>
         <button className="filter" value="All" onClick={handleOnClick}>
           All
         </button>
