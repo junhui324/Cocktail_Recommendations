@@ -1,20 +1,16 @@
+@import "./mixins.scss";
+
 .btn_div {
   display: flex;
   justify-content: center;
 
   button {
-    all: unset;
-    width: 150px;
-    padding: 5px 10px;
-    text-align: center;
-    border: 1px solid black;
-    border-radius: 10px;
+    @include button-common;
+  }
+}
 
-    &:hover {
-      cursor: pointer;
-      background-color: black;
-      color: white;
-      transition: all 0.5s;
-    }
+@media (min-width: 600px) {
+  .option_form {
+    padding: 0 40px;
   }
 }
