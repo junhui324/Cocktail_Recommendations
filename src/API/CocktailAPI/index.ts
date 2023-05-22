@@ -226,7 +226,7 @@ async function getCocktailWithWeather(mainWeather: string) {
       return response.drinks;
     }
   } catch (err) {
-    throw new Error('Glass 옵션 칵테일 API 통신 에러');
+    throw new Error("Glass 옵션 칵테일 API 통신 에러");
   }
 }
 
@@ -242,7 +242,7 @@ export async function getCocktailDescription(id: number) {
   )
     .then((res) => res.json())
     .then((data) => data.drinks[0])
-    .catch((e) => console.log('Error: ', e));
+    .catch((e) => console.log("Error: ", e));
 
   return drink;
 }
@@ -258,7 +258,7 @@ export async function getCocktailIngredients(id: number) {
   )
     .then((res) => res.json())
     .then((data) => data.drinks[0])
-    .catch((e) => console.log('Error: ', e));
+    .catch((e) => console.log("Error: ", e));
 
   const ingredients = [];
   const measures = [];
@@ -300,13 +300,33 @@ export type QuizQuestion = {
   answer: string; // 정답 칵테일 이름
 };
 
+/**
+ * 모든 칵테일중 랜덤으로 선정 후, 퀴즈 문제를 반환하는 함수
+ * @returns 퀴즈 문제배열
+ */
 export async function fetchQuestions(): Promise<QuizQuestion[]> {
   const cocktailResponse = await getWholeCocktailUsingAlphabet();
   const quizQuestions: QuizQuestion[] = [];
 
+  /**
+   * 퀴즈 문제 배열을 랜덤으로 섞는 함수
+   * @param 랜덤으로 불러온 칵테일 배열
+   * @returns 랜덤하게 섞인 배열
+   */
+  function shuffleArray<T>(array: T[]): T[] {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  }
+
   for (let i = 0; i < 4; i++) {
     const cocktail = cocktailResponse[i];
     const choices = getRandomCocktails(cocktailResponse, 3);
+    const answer = cocktail.strDrink;
+    const shuffledChoices = shuffleArray([...choices, answer]);
     quizQuestions.push({
       id: i.toString(),
       cocktail: {
@@ -315,10 +335,12 @@ export async function fetchQuestions(): Promise<QuizQuestion[]> {
         strInstructions: cocktail.strInstructions,
         strDrinkThumb: cocktail.strDrinkThumb,
       },
-      choices: [...choices, cocktail.strDrink],
-      answer: cocktail.strDrink,
+      choices: shuffledChoices,
+      answer: answer,
     });
   }
-
+  console.log("======");
+  console.log(quizQuestions);
+  console.log("======");
   return quizQuestions;
 }
