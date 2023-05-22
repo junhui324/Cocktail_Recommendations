@@ -1,3 +1,6 @@
+.weather {
+}
+
 .title {
   display: flex;
   justify-content: center;
@@ -32,6 +35,29 @@
     p {
       margin: 2px;
       font-weight: bold;
+    }
+  }
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  height: 200px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 0;
     }
   }
 }

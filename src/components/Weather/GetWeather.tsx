@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { fetchWeatherData, getLocation } from '../../API/WeatherAPI/index';
-import { Clock } from './Clock';
-import { Cocktail } from './Cocktail';
-import { useSelector, Provider } from 'react-redux';
-import { RootState, store } from '../../store/store';
+import React, { useState, useEffect } from "react";
+import { fetchWeatherData, getLocation } from "../../API/WeatherAPI/index";
+import { Clock } from "./Clock";
+import { Cocktail } from "./Cocktail";
+import { useSelector, Provider } from "react-redux";
+import { RootState, store } from "../../store/store";
 
-import { SearchAddress } from './SearchAddress';
+import { SearchAddress } from "./SearchAddress";
 
-import styles from './Weather.module.scss';
+import styles from "./Weather.module.scss";
 
 type WeatherData = {
   name: string;
@@ -33,7 +33,7 @@ function GetWeather() {
         const weatherData = await fetchWeatherData(latitude, longitude);
         setWeather(weatherData);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
     getCurrentWeather();
@@ -47,7 +47,7 @@ function GetWeather() {
           setWeather(weatherData);
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
     getCurrentWeather();
