@@ -1,0 +1,11 @@
+@import "./mixins.scss";
+
+.link_div {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.link {
+  @include button-common;
+}
