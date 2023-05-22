@@ -58,6 +58,7 @@ function Search({ wholeCocktails }: searchPropsType) {
           id={styles.inputBar}
           type="text"
           name="searchQuery"
+          placeholder="칵테일명을 입력해주세요."
           onChange={handleSearchInputChange}
         />
         <button id={styles.searchButton} type="submit">

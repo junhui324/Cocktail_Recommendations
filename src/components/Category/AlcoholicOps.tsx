@@ -54,14 +54,22 @@ function AlcoholicOps() {
   return (
     <>
       <div className={styles.alcoholicFilterContainer}>
-        <button className="filter" value="All" onClick={handleOnClick}>
+        <button
+          className={styles.allAlcoholicFilter}
+          value="All"
+          onClick={handleOnClick}
+        >
           All
         </button>
-        <button className="filter" value="Alcoholic" onClick={handleOnClick}>
+        <button
+          className={styles.alcoholicFilter}
+          value="Alcoholic"
+          onClick={handleOnClick}
+        >
           Alcoholic
         </button>
         <button
-          className="filter"
+          className={styles.nonAlcoholicFilter}
           value="Non alcoholic"
           onClick={handleOnClick}
         >

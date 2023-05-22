@@ -1,9 +1,18 @@
 .checkboxContainer {
   display: flex;
+  position: sticky;
   flex-direction: column;
-  border: 1px solid #000;
-  margin: 10px;
+  left: 10%;
+  transform: translateX(-50%);
+
   padding: 10px;
+  border: 1px solid #fde2f3;
 
   width: 200px;
+
+  background-color: #fff;
+  color: #2a2f4f;
+}
+
+.checkboxAll {
 }

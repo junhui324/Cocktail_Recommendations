@@ -10,7 +10,7 @@ function Category() {
   return (
     <CWLayout>
       <Provider store={store}>
-        <h2>Browsing our cocktails</h2>
+        <h2>Browsing our cocktails!</h2>
         <Contents />
         <AlcoholicOps />
         <ScrollHandler />

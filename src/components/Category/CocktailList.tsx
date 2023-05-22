@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AlcoholFilteredListContext } from './AlcoholicOps';
 import { RootState } from '../../store/store';
-import Pagination from '../Pagination/Pagination';
+import Pagination from '../Common/Pagination';
 import styles from './CocktailList.module.scss';
 import { useSelector } from 'react-redux';
 
@@ -66,11 +66,14 @@ function CocktailList() {
               />
             </NavLink>
 
-            <p className={styles.cocktailName}>
-              <NavLink to={`/detail/${cocktail.idDrink}`}>
-                {cocktail.strDrink}
-              </NavLink>
-            </p>
+            <NavLink
+              to={`/detail/${cocktail.idDrink}`}
+              className={styles.cocktailName}
+            >
+              {cocktail.strDrink.length > 20
+                ? `${cocktail.strDrink.substring(0, 17)}...`
+                : cocktail.strDrink}
+            </NavLink>
           </div>
         ))
       ) : (

@@ -1,20 +1,39 @@
 .cocktailContainer {
-  position: relative;
   display: grid;
+  position: relative;
+  justify-content: center;
   grid-gap: 10px;
   grid-template-columns: repeat(4, 250px);
   flex-wrap: wrap;
 
-  padding: 10px;
+  //  margin: 0 0 0 60px;
 }
 .cocktailImage {
-  margin: 0;
+  margin: 15px 0 0 0;
   padding: 0;
   width: 250px;
   height: 250px;
 }
 
 .cocktailName {
+  display: flex;
+  justify-content: center;
+
   margin: 0;
   padding: 5px;
+
+  color: #ecf2ff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+
+  transition: transform 0.3s ease;
+
+  &:hover {
+    color: #fde2f3;
+    text-decoration: none;
+    font-weight: bold;
+
+    transform: scale(1.2);
+  }
 }

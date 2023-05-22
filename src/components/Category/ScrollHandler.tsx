@@ -37,10 +37,10 @@ function ScrollHandler() {
   return (
     <div className={styles.scrollButton}>
       <button id={styles.scrollTopButton} onClick={scrollToTop}>
-        ↑
+        ▲
       </button>
       <button id={styles.scrollBottomButton} onClick={scrollToBottom}>
-        ↓
+        ▼
       </button>
     </div>
   );

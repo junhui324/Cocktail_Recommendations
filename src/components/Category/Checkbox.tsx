@@ -61,21 +61,18 @@ function Checkbox({ isCheckedAll, setIsCheckedAll }: checkBoxPropsType) {
 
   return (
     <>
-      <div className={styles.checkboxContainer}>
-        {Object.values(CATEGORY).map((category, idx) => (
-          <label key={idx + 1} style={{ display: 'flex' }}>
-            <input
-              type="checkbox"
-              className="category"
-              checked={isChecked.includes(category)}
-              value={category}
-              onChange={handleIsChecked}
-              style={{ display: 'flex' }}
-            />
-            {category}
-          </label>
-        ))}
-      </div>
+      {Object.values(CATEGORY).map((category, idx) => (
+        <label key={idx + 1}>
+          <input
+            type="checkbox"
+            className={styles.checkbox}
+            checked={isChecked.includes(category)}
+            value={category}
+            onChange={handleIsChecked}
+          />
+          {category}
+        </label>
+      ))}
     </>
   );
 }

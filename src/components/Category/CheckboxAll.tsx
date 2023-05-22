@@ -18,14 +18,13 @@ function CheckboxAll() {
   return (
     <>
       <div className={styles.checkboxContainer}>
-        <label key={0} style={{ display: 'flex' }}>
+        <label>
           <input
             type="checkbox"
-            className="category"
+            className={styles.checkboxAll}
             checked={isCheckedAll}
             value="All"
             onChange={handleIsCheckedAll}
-            style={{ display: 'flex' }}
           />
           All
         </label>
