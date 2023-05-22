@@ -6,6 +6,18 @@ import { setCoordinates } from '../../store/coordinatesSlice';
 import { RootState, store } from '../../store/store';
 import styles from './SearchAddress.module.scss';
 
+const themeObj = {
+  bgColor: '#7A86B6', //바탕 배경색
+  searchBgColor: '#495C83', //검색창 배경색
+  contentBgColor: '#ECF2FF', //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
+  pageBgColor: '#FAFAFA', //페이지 배경색
+  //textColor: "", //기본 글자색
+  queryTextColor: '#FFFFFF', //검색창 글자색
+  //postcodeTextColor: "", //우편번호 글자색
+  //emphTextColor: "", //강조 글자색
+  outlineColor: '#495C83', //테두리
+};
+
 export function SearchAddress(): JSX.Element {
   const [openPostcode, setOpenPostcode] = useState<boolean>(false);
   const [address, setAddress] = useState<string>('');
@@ -62,6 +74,7 @@ export function SearchAddress(): JSX.Element {
 
         {openPostcode && (
           <DaumPostcode
+            theme={themeObj}
             onComplete={handleSearchAddressButton.selectAddress} // 값을 선택할 경우 실행되는 이벤트
             autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
           />

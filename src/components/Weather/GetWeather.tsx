@@ -76,7 +76,7 @@ function GetWeather() {
         </div>
 
         <div className={styles.section}>
-          <div>
+          <div className={styles.showData}>
             <img src={iconUrl} alt="Weather Icon" />
             <p>현재 시각 : {<Clock></Clock>}</p>
             <p>현재 지역 : {name}</p>
@@ -84,7 +84,7 @@ function GetWeather() {
             <p>날씨 : {description}</p>
           </div>
 
-          <div>
+          <div className={styles.address}>
             <SearchAddress></SearchAddress>
           </div>
         </div>
