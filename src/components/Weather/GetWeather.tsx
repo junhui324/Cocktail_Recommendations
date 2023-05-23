@@ -69,14 +69,12 @@ function GetWeather() {
     <Provider store={store}>
       <div className={styles.weather}>
         <div className={styles.title}>
-          <h1>
-            날씨가 {description}일 때 어울리는 칵테일{' '}
-            <img src={iconUrl} alt="Weather Icon"></img>
-          </h1>
+          <h1>날씨가 {description}일 때 어울리는 칵테일 </h1>
+          <img className={styles.icon} src={iconUrl} alt="Weather Icon"></img>
         </div>
 
-        <div className={styles.section}>
-          <div className={styles.showData}>
+        <section className={styles.section}>
+          <div>
             <img src={iconUrl} alt="Weather Icon" />
             <p>현재 시각 : {<Clock></Clock>}</p>
             <p>현재 지역 : {name}</p>
@@ -84,10 +82,11 @@ function GetWeather() {
             <p>날씨 : {description}</p>
           </div>
 
-          <div className={styles.address}>
+          <div>
             <SearchAddress></SearchAddress>
           </div>
-        </div>
+        </section>
+
         <div className={styles.img}>
           <Cocktail mainWeather={mainWeather}></Cocktail>
         </div>

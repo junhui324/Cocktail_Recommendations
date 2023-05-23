@@ -1,6 +1,15 @@
 .title {
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  width: 55px;
+  height: 55px;
 }
 
 .img {
@@ -12,7 +21,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
-  height: 200px;
+  padding-bottom: 80px;
 
   div {
     display: flex;

@@ -9,6 +9,18 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .cocktail {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cocktail {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .link {
   color: #ecf2ff;
   text-decoration: none;
