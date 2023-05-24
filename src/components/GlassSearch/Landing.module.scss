@@ -1,58 +1,53 @@
 .loadingPg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-size: 26px;
-    animation: pulse 0.4s 3;
-    color: #6b799e;
-    font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 26px;
+  animation: pulse 0.4s 3;
+  color: #6b799e;
+  font-weight: 700;
+}
 
+@keyframes pulse {
+  0% {
+    font-size: 26px;
   }
-  
-  @keyframes pulse {
-    0% {
-      font-size: 26px;
-    }
-    50% {
-      font-size: 32px;
-    }
-    100% {
-      font-size: 26px;
-    }
+  50% {
+    font-size: 32px;
   }
-  
-  
+  100% {
+    font-size: 26px;
+  }
+}
 
 .weatherbox {
-    align-items: center;
-    text-align: center;
-    border-radius: 5px;
-    margin: 10px;
-    width: 700px;
-    border: dotted 1px black;
-    padding: 10px;
-    // background-color: #f6f9fa;
+  align-items: center;
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px;
+  width: 700px;
+  border: dotted 1px black;
+  padding: 10px;
+  // background-color: #f6f9fa;
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 
-    line-height: 15px;
-
+  line-height: 15px;
 }
 
 .drinkImg {
-    width: 350px;
-    height: 350px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+  width: 350px;
+  height: 350px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 
-    &:hover {
-        transform: scale(0.98);
-    }
+  &:hover {
+    transform: scale(0.98);
+  }
 }
-
 
 // 날씨 아이콘 시작
 .weatherIcons {
@@ -67,22 +62,22 @@
 
 @keyframes moveX {
   0% {
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
   }
   100% {
-    transform: translateX(150%); 
+    transform: translateX(150%);
   }
 }
 // 날씨 아이콘 끝
 
-
 // 버튼 박스 시작
 .buttonBox {
   display: flex;
-  justify-content: space-between;  // 버튼 사이에 공간 추가
+  justify-content: space-between; // 버튼 사이에 공간 추가
 }
 
-.learnBtn, .againBtn {
+.learnBtn,
+.againBtn {
   background-color: #6b799e;
   border: none;
   color: white;
@@ -108,7 +103,7 @@
 // 버튼 박스 끝
 
 .cocktailName {
-    color: #9c8f96;
-    font-size: 26px;
-    margin: 20px auto;
+  color: #9c8f96;
+  font-size: 26px;
+  margin: 20px auto;
 }
