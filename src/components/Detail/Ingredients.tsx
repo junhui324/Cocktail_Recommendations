@@ -4,6 +4,7 @@ import {
   getCocktailIngredients,
   getIngredientImg,
 } from '../../API/CocktailAPI';
+import styles from './Detail.module.scss';
 
 function Ingredients() {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -31,16 +32,24 @@ function Ingredients() {
 
   return (
     <>
-      <h3>Ingredients</h3>
-      <div>
+      <h2>Ingredients</h2>
+      <div className={styles.ingredients_container}>
         {ingredients.map((ingredient: string, index: number) => {
           const ingredientImg = ingredientImgs[index];
 
           return (
-            <span key={index}>
-              {ingredientImg && <img src={ingredientImg} alt={ingredient} />}
-              {measures[index]} {ingredient}
-            </span>
+            <div key={index} className={styles.ingredients}>
+              {ingredientImg && (
+                <img
+                  src={ingredientImg}
+                  alt={ingredient}
+                  className={styles.ingredient_img}
+                />
+              )}
+              <div className={styles.ingredient_name}>
+                {measures[index]} {ingredient}
+              </div>
+            </div>
           );
         })}
       </div>

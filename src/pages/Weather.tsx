@@ -8,10 +8,12 @@ import { store } from '../store/store';
 function Weather() {
   return (
     <Provider store={store}>
-      <Layout>
-        <GetWeather></GetWeather>
-        <SearchAddress></SearchAddress>
-      </Layout>
+      <div>
+        <Layout>
+          <GetWeather></GetWeather>
+          <SearchAddress></SearchAddress>
+        </Layout>
+      </div>
     </Provider>
   );
 }
