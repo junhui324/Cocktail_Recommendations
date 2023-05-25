@@ -2,7 +2,8 @@ import React from 'react';
 
 import Header from './Header/Header';
 import Footer from './Footer';
-import styles from './CWLayout.module.scss';
+
+import styles from './CSLayout.module.scss';
 
 function CWLayout(props: { children: React.ReactNode }) {
   return (

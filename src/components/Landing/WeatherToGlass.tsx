@@ -2,7 +2,7 @@
 // 호출된 API에서 반환된 칵테일 중에서 랜덤으로 하나를 선택하여 추천하는 기능을 추가
 
 import React, { useEffect, useState } from 'react';
-import styles from './Landing.module.scss'
+import styles from './WeatherToGlass.module.scss'
 
 const weatherToGlass = {
   'Thunderstorm': 'Coffee_mug',
@@ -36,6 +36,17 @@ interface Props {
 const CocktailList: React.FC<Props> =({ weather, onCocktailSelected }) => {
   const [cocktail, setCocktail] = useState<Cocktail | null>(null);
 
+
+  // 해당 칵테일에 관한 구글 검색 페이지로 이동하기
+  const handleGoogleSearch = () => {
+    if (cocktail && cocktail.strDrink) {
+      const searchWord = cocktail.strDrink;
+      const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchWord)}`;
+      window.open(searchUrl, '_blank');
+    }
+  };
+  
+
   useEffect(() => {
     const fetchCocktails = async () => {
       const glassOption = weatherToGlass[weather];
@@ -68,12 +79,15 @@ const CocktailList: React.FC<Props> =({ weather, onCocktailSelected }) => {
   }, [weather, onCocktailSelected]);
 
   if (!cocktail) {
-    return <div>Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   }
 
   return (
     <div>
       <h4 className={styles.cocktailName}>{cocktail.strDrink}</h4>
+      <button 
+        onClick={handleGoogleSearch}
+        className={styles.googleBtn}>칵테일 정보 Google 검색</button>
       <img 
         src={cocktail.strDrinkThumb} 
         alt={cocktail.strDrink} 
