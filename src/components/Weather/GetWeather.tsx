@@ -67,27 +67,27 @@ function GetWeather() {
 
   return (
     <Provider store={store}>
-      <div>
+      <div className={styles.weather}>
         <div className={styles.title}>
-          <h1>
-            날씨가 {description}일 때 어울리는 칵테일{' '}
-            <img src={iconUrl} alt="Weather Icon"></img>
-          </h1>
+          <h1>날씨가 {description}일 때 어울리는 칵테일 </h1>
+          <img className={styles.icon} src={iconUrl} alt="Weather Icon"></img>
         </div>
 
-        <div>
-          <img src={iconUrl} alt="Weather Icon" />
-          <p>현재 시각 : {<Clock></Clock>}</p>
-          <p>현재 지역 : {name}</p>
-          <p>온도 : {temperature}</p>
-          <p>날씨 : {description}</p>
-        </div>
+        <section className={styles.section}>
+          <div>
+            <img src={iconUrl} alt="Weather Icon" />
+            <p>현재 시각 : {<Clock></Clock>}</p>
+            <p>현재 지역 : {name}</p>
+            <p>온도 : {temperature}</p>
+            <p>날씨 : {description}</p>
+          </div>
 
-        <div>
-          <SearchAddress></SearchAddress>
-        </div>
+          <div>
+            <SearchAddress></SearchAddress>
+          </div>
+        </section>
 
-        <div>
+        <div className={styles.img}>
           <Cocktail mainWeather={mainWeather}></Cocktail>
         </div>
       </div>

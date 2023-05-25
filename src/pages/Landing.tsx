@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import CocktailList from '../components/GlassSearch/WeatherToGlass';
-import Layout from '../Layout/Layout';
-import styles from '../components/GlassSearch/Landing.module.scss';
-import { useNavigate } from 'react-router-dom';
-import { fetchWeatherData, getLocation } from '../API/WeatherAPI/index';
+import React from 'react';
+import CocktailMatch from '../components/Landing/CocktailMatch';
+import CHLayout from '../components/Landing/CHLayout';
+import CHPageCard from '../components/Landing/CHPageCard';
 
 function Landing() {
   const navigate = useNavigate();
@@ -77,55 +75,11 @@ function Landing() {
   const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
 
   return (
-    <Layout>
-      <div className={styles.weatherbox}>
-        <h3>현재 당신이 계신 곳은..</h3>
-        <h3>{name}</h3>
-        <p>
-          날씨 : {description} | {temperature}{' '}
-        </p>
-
-        <div className={styles.weatherIcons}>
-          <img
-            src={iconUrl}
-            alt="Weather Icon"
-            className={styles.weatherIcon}
-          ></img>
-          <img
-            src={iconUrl}
-            alt="Weather Icon"
-            className={styles.weatherIcon}
-          ></img>
-          <img
-            src={iconUrl}
-            alt="Weather Icon"
-            className={styles.weatherIcon}
-          ></img>
-        </div>
-        <h3>[{description}] 날씨에 어울리는 칵테일은..</h3>
-
-        <CocktailList
-          weather={weatherName}
-          key={reloadKey}
-          onCocktailSelected={setSelectedCocktailId}
-        />
-
-        <div className={styles.buttonBox}>
-          <button
-            onClick={handleButtonClickForDetail}
-            className={styles.learnBtn}
-          >
-            추천 칵테일에 대해 더 알아보기
-          </button>
-          <button
-            onClick={handleButtonClickForReload}
-            className={styles.againBtn}
-          >
-            다시 추천받기
-          </button>
-        </div>
-      </div>
-    </Layout>
+    <CHLayout>
+      <CHPageCard>
+        <CocktailMatch></CocktailMatch>
+      </CHPageCard>
+    </CHLayout>
   );
 }
 
