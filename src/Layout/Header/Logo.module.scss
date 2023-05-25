@@ -1,0 +1,10 @@
+.logo_img {
+  width: 45px;
+  height: 45px;
+}
+
+@media (min-width: 768px) {
+  .logo_link {
+    display: none;
+  }
+}

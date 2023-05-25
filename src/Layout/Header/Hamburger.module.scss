@@ -1,10 +1,10 @@
-.div {
-  display: flex;
-  justify-content: flex-end;
+.toggle_btn {
+  all: unset;
+  margin-right: 10px;
 }
 
 @media (min-width: 768px) {
-  .div {
+  .toggle_btn {
     display: none;
   }
 }
