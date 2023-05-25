@@ -22,9 +22,9 @@ function GameStart() {
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
-
   const [gameOver, setGameOver] = useState(true);
   const [showBanner, setShowBanner] = useState(true);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const handleStart = async () => {
     setShowBanner(false);
@@ -36,6 +36,7 @@ function GameStart() {
     setUserAnswers([]);
     setNumber(0);
     setLoading(false);
+    setGameStarted(true);
   };
 
   const checkAnswer = (e: any) => {
@@ -58,9 +59,7 @@ function GameStart() {
 
   const handleNextQuestion = () => {
     const nextQ = number + 1;
-    console.log(nextQ);
     if (nextQ === TOTAL_QUESTIONS - 1) {
-      console.log("game over!");
       setGameOver(true);
     } else {
       setNumber(nextQ);
@@ -72,7 +71,7 @@ function GameStart() {
       {showBanner && <GameBanner />}
       {gameOver ? (
         <>
-          <Score score={score} show={true} />
+          <Score score={score} show={true} gameStarted={gameStarted} />
           <StartButton
             gameOver={gameOver}
             userAnswers={userAnswers}
