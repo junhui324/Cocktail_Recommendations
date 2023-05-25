@@ -62,16 +62,24 @@ function Checkbox({ isCheckedAll, setIsCheckedAll }: checkBoxPropsType) {
   return (
     <>
       {Object.values(CATEGORY).map((category, idx) => (
-        <label key={idx + 1}>
-          <input
-            type="checkbox"
-            className={styles.checkbox}
-            checked={isChecked.includes(category)}
-            value={category}
-            onChange={handleIsChecked}
-          />
-          {category}
-        </label>
+        <>
+          <label
+            key={idx + 1}
+            htmlFor={`checkbox-${idx + 1}`}
+            className={styles.label}
+          >
+            <input
+              type="checkbox"
+              className={styles.checkbox}
+              id={`checkbox-${idx + 1}`}
+              checked={isChecked.includes(category)}
+              value={category}
+              onChange={handleIsChecked}
+            />
+            <span className={styles.checkmark}></span>
+            {category}
+          </label>
+        </>
       ))}
     </>
   );

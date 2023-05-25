@@ -1,5 +1,5 @@
 import React from 'react';
-import CWLayout from '../Layout/CWLayout';
+import LayoutCategory from '../Layout/LayoutCategory';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
 import Contents from '../components/Category/Contents';
@@ -8,14 +8,13 @@ import ScrollHandler from '../components/Category/ScrollHandler';
 
 function Category() {
   return (
-    <CWLayout>
+    <LayoutCategory>
       <Provider store={store}>
-        <h2>Browsing our cocktails!</h2>
         <Contents />
         <AlcoholicOps />
         <ScrollHandler />
       </Provider>
-    </CWLayout>
+    </LayoutCategory>
   );
 }
 

@@ -1,39 +1,49 @@
 .searchContainer {
-  // display: flex;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 
+  margin-top: 7%;
   align-items: center;
   justify-content: center;
-}
-
-.searchBar {
-  display: flex;
-  margin-top: 20px;
 }
 
 #inputBar {
   display: flex;
   flex-grow: 1;
+  position: relative;
   border-radius: 24px;
   border: 1px solid #c6cfe0;
-  margin: 0 auto;
-  padding: 10px 10px;
+  padding: 10px;
+  padding-left: 50px;
+  padding-right: 80px;
 
-  min-height: 15px;
-  width: 300px;
-  //  width: auto;
-  max-width: 500px;
+  min-height: 20px;
+  width: 270px;
+  max-width: 400px;
   background: #fff;
 
+  font-size: 15px;
   z-index: 1;
 }
 
 #inputBar ::placeholder {
-  font: 15px #ecf2ff;
+  font: 20px #ecf2ff;
+  text-align: center;
+  padding-right: 40px;
 }
 
 #searchButton {
   z-index: 2;
+  position: absolute;
+  transform: translate(35%, 35%);
+  top: 0%;
+  left: 83%;
+
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
 }

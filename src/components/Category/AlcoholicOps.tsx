@@ -52,35 +52,49 @@ function AlcoholicOps() {
   };
 
   return (
-    <>
-      <div className={styles.alcoholicFilterContainer}>
+    <section className={styles.mainContents}>
+      <nav className={styles.alcoholicFilterContainer}>
         <button
-          className={styles.allAlcoholicFilter}
+          className={
+            alcoholicOps === 'All'
+              ? styles.activeAlcoholicFilter
+              : styles.alcoholicFilter
+          }
           value="All"
           onClick={handleOnClick}
         >
           All
         </button>
         <button
-          className={styles.alcoholicFilter}
+          className={
+            alcoholicOps === 'Alcoholic'
+              ? styles.activeAlcoholicFilter
+              : styles.alcoholicFilter
+          }
           value="Alcoholic"
           onClick={handleOnClick}
         >
           Alcoholic
         </button>
         <button
-          className={styles.nonAlcoholicFilter}
+          className={
+            alcoholicOps === 'Non alcoholic'
+              ? styles.activeAlcoholicFilter
+              : styles.alcoholicFilter
+          }
           value="Non alcoholic"
           onClick={handleOnClick}
         >
           Non-Alcoholic
         </button>
+      </nav>
+      <div className={styles.contentsContainer}>
+        <AlcoholFilteredListContext.Provider value={alcoholFilteredList}>
+          <CheckboxAll />
+          <CocktailList />
+        </AlcoholFilteredListContext.Provider>
       </div>
-      <AlcoholFilteredListContext.Provider value={alcoholFilteredList}>
-        <CheckboxAll />
-        <CocktailList />
-      </AlcoholFilteredListContext.Provider>
-    </>
+    </section>
   );
 }
 

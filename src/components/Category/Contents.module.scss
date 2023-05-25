@@ -1,0 +1,17 @@
+.titleBox {
+  display: flex;
+  position: absolute;
+  margin-top: 3%;
+  margin-left: 5%;
+  width: 500px;
+
+  .title {
+    text-decoration: none;
+    color: #ecf2ff;
+    font-size: 35px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

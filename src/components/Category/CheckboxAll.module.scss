@@ -1,18 +1,60 @@
 .checkboxContainer {
   display: flex;
-  position: sticky;
+  position: relative;
   flex-direction: column;
-  left: 10%;
-  transform: translateX(-50%);
+  width: 250px;
+  right: -5%;
 
+  margin-top: 50px;
   padding: 10px;
-  border: 1px solid #fde2f3;
+  border: 5px solid #fde2f3;
+  background-color: #2a2f4f;
+  box-shadow: 2px 1px 4px rgba(0, 0, 0, 1.5);
 
-  width: 200px;
+  color: #efeff0;
+  font-size: 23px;
 
-  background-color: #fff;
-  color: #2a2f4f;
+  input[type='checkbox'] {
+    margin-right: 15px;
+  }
+}
+
+.label {
+  display: flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+
+  &:checked {
+    font-weight: 600px;
+  }
 }
 
 .checkboxAll {
+  display: none;
+
+  & + .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #efeff0;
+    border: 1px solid #fff;
+    margin-right: 10px;
+    border-radius: 3px;
+    top: 0.5px; //체크박스 아래로 이동
+    cursor: pointer;
+  }
+
+  &:checked + .checkmark::before {
+    content: '';
+    position: absolute;
+    top: 1.1px;
+    left: 1.2px;
+    width: 16px;
+    height: 16px;
+    background-color: #917fb3;
+    border-radius: 3px;
+  }
 }

@@ -54,7 +54,7 @@ function CocktailList() {
   };
 
   return (
-    <section className={styles.cocktailContainer}>
+    <article className={styles.cocktailContainer}>
       {currentPageCocktails.length !== 0 ? (
         currentPageCocktails.map((cocktail, idx) => (
           <div key={idx}>
@@ -77,7 +77,12 @@ function CocktailList() {
           </div>
         ))
       ) : (
-        <div>설정된 카테고리에 해당하는 칵테일이 없습니다.</div>
+        <div className={styles.nonResultMessage}>
+          ☹
+          <p id={styles.resultMessage}>
+            설정된 카테고리에 해당하는 칵테일이 없습니다.
+          </p>
+        </div>
       )}
       {currentPageCocktails.length !== 0 && (
         <Pagination
@@ -86,7 +91,7 @@ function CocktailList() {
           handlePageQueryChange={handlePageQueryChange}
         />
       )}
-    </section>
+    </article>
   );
 }
 

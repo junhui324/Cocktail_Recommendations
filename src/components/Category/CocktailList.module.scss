@@ -1,15 +1,19 @@
 .cocktailContainer {
   display: grid;
-  position: relative;
-  justify-content: center;
   grid-gap: 10px;
-  grid-template-columns: repeat(4, 250px);
-  flex-wrap: wrap;
+  grid-template-columns: repeat(4, 4fr);
+  grid-template-rows: repeat(5, 5fr);
+  position: relative; //pagination 부모
+  align-items: flex-start;
 
-  //  margin: 0 0 0 60px;
+  margin-bottom: 150px;
+  left: 10%;
+
+  width: 1030px;
+  height: 1500px;
 }
 .cocktailImage {
-  margin: 15px 0 0 0;
+  margin-top: 15px;
   padding: 0;
   width: 250px;
   height: 250px;
@@ -36,4 +40,25 @@
 
     transform: scale(1.2);
   }
+}
+
+.nonResultMessage {
+  display: flex;
+  position: absolute;
+  align-items: center;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 650px;
+  height: 300px;
+  font-size: 100px;
+}
+
+#resultMessage {
+  margin-left: 15px;
+  display: flex;
+  position: relative;
+  font-size: 25px;
+  font-weight: 500;
 }

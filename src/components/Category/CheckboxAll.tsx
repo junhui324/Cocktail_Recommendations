@@ -18,15 +18,16 @@ function CheckboxAll() {
   return (
     <>
       <div className={styles.checkboxContainer}>
-        <label>
+        <label htmlFor="checkboxAll" className={styles.label}>
           <input
             type="checkbox"
             className={styles.checkboxAll}
+            id="checkboxAll"
             checked={isCheckedAll}
             value="All"
             onChange={handleIsCheckedAll}
           />
-          All
+          <span className={styles.checkmark}></span>All
         </label>
         <Checkbox
           isCheckedAll={isCheckedAll}

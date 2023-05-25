@@ -1,2 +1,34 @@
+.label {
+  display: flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+}
+
 .checkbox {
+  display: none;
+
+  & + .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    top: 0.5px; //체크박스 아래로 이동
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  &:checked + .checkmark::before {
+    content: '';
+    position: absolute;
+    top: 1.1px;
+    left: 1.2px;
+    width: 16px;
+    height: 16px;
+    background-color: #917fb3;
+    border-radius: 3px;
+  }
 }
