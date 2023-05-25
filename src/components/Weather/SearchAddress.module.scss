@@ -33,6 +33,24 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .searchAddress {
+    button {
+      padding: 11px 23px;
+      font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .searchAddress {
+    button {
+      padding: 9px 17px;
+      font-size: 14px;
+    }
+  }
+}
+
 @keyframes gradient1 {
   0% {
     background-position: 0% 50%;

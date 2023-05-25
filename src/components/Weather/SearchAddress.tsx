@@ -43,7 +43,6 @@ export function SearchAddress(): JSX.Element {
     },
   };
 
-  //일단 뭐... 작동은 됨. 이제 구한 위도 경도로 다시 날씨를 구해야함
   useEffect(() => {
     const getGeocoderData = async () => {
       try {
