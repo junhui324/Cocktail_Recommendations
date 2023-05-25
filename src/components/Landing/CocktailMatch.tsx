@@ -4,7 +4,7 @@ import styles from "./CocktailMatch.module.scss"
 import { useNavigate } from "react-router-dom";
 import { fetchWeatherData, getLocation } from '../../API/WeatherAPI/index';
 
-function Landing() {
+function CocktailMatch() {
   const navigate = useNavigate();
   
   // 추천받은 칵테일 상세 페이지로 넘어가기
@@ -18,6 +18,15 @@ function Landing() {
       console.warn("칵테일 상세 페이지로 이동 중 에러 발생");
     }
   };
+
+  // weather 페이지로 넘어가기  
+  const handleLocationBtnClick = () => {
+    navigate(`/weather`);
+  }
+
+
+    
+
   
   
   // 칵테일 다시 추천받기 기능
@@ -69,17 +78,20 @@ function Landing() {
 
   return (
       <div>
-        <h3>현재 위치한 곳의 날씨</h3>
-        <h3>{name}</h3>
-        <p>날씨 : {description} | {temperature} </p>
+        <h3 className={styles.h3}>현재 위치한 곳의 날씨</h3>
+        <h3 className={styles.h3}>{name}</h3>
+        <button
+          onClick={handleLocationBtnClick} 
+          className={styles.locationBtn}>주소별 칵테일 조회하러가기</button>
+        <p className={styles.p}>날씨 : {description} | {temperature} </p>
         
         <div className={styles.weatherIcons}>
           <img src={iconUrl} alt="Weather Icon" className={styles.weatherIcon}></img>
           <img src={iconUrl} alt="Weather Icon" className={styles.weatherIcon}></img>
           <img src={iconUrl} alt="Weather Icon" className={styles.weatherIcon}></img>
         </div>
-        <h3>[{description}] 날씨에 어울리는 칵테일</h3>
-
+        <h3 className={styles.h3}>[{description}] 날씨에 어울리는 칵테일</h3>
+ 
         <CocktailList 
           weather={weatherName}
           key={reloadKey}
@@ -89,13 +101,14 @@ function Landing() {
         <div className={styles.buttonBox}>
           <button 
             onClick={handleButtonClickForDetail}
-            className={styles.learnBtn}>추천 칵테일에 대해 더 알아보기</button>
+            className={styles.learnBtn}>칵테일 제조법 알아보기</button>
           <button 
             onClick={handleButtonClickForReload}
-            className={styles.againBtn}>다시 추천받기</button>
+            className={styles.againBtn}>칵테일 다시 추천받기</button>
+          
         </div>
       </div>
   );
 }
 
-export default Landing;
+export default CocktailMatch;
