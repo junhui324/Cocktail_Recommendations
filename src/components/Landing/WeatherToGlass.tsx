@@ -2,7 +2,7 @@
 // 호출된 API에서 반환된 칵테일 중에서 랜덤으로 하나를 선택하여 추천하는 기능을 추가
 
 import React, { useEffect, useState } from 'react';
-import styles from './Landing.module.scss'
+import styles from './WeatherToGlass.module.scss'
 
 const weatherToGlass = {
   'Thunderstorm': 'Coffee_mug',
@@ -68,7 +68,7 @@ const CocktailList: React.FC<Props> =({ weather, onCocktailSelected }) => {
   }, [weather, onCocktailSelected]);
 
   if (!cocktail) {
-    return <div>Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   }
 
   return (
