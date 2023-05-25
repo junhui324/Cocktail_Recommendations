@@ -79,6 +79,13 @@ function Pagination({
           </NavLink>
         )
       )}
+      {pageNumbers
+        .slice(slicePageIdx - 1, slicePageIdx + 4)
+        .includes(totalPages) ? (
+        <span></span>
+      ) : (
+        <span className={styles.reducedNumber}>...</span>
+      )}
 
       <button onClick={handleNextPageClick}>{`>`}</button>
       <button onClick={handleLastPageClick}>{`>>`}</button>
