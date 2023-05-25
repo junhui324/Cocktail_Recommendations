@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import NavList from "./NavList";
-import styles from "./NavBar.module.scss";
+import NavList from './NavList';
+import styles from './NavBar.module.scss';
 
 function NavBar() {
   return (
