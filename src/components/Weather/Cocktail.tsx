@@ -70,6 +70,19 @@ export function Cocktail({ mainWeather }: CocktailProps) {
 
       if (option) {
         setCocktailsPerPage(option.cocktailsPerPage);
+        // Check if current page is still valid
+        if (
+          currentPage > Math.ceil(cocktail.length / option.cocktailsPerPage)
+        ) {
+          const validPage = Math.ceil(
+            cocktail.length / option.cocktailsPerPage
+          );
+          setCurrentPage(validPage);
+
+          // Update URL parameter with valid page
+          queryParams.set('page', validPage.toString());
+          navigate(`?${queryParams.toString()}`);
+        }
       }
     };
 
@@ -90,7 +103,7 @@ export function Cocktail({ mainWeather }: CocktailProps) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [cocktail, currentPage]);
 
   console.log(totalPages);
 
