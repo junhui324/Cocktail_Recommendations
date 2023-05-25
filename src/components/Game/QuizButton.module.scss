@@ -64,7 +64,14 @@ div {
 div.button-wrapper {
   &.user-clicked {
     button {
-      background: linear-gradient(90deg, #fb2929, #9d4747);
+      background: linear-gradient(90deg, #fb2929, #d13613);
+      color: #ffffff;
+      font-weight: bold;
+      &::after {
+        content: "😓";
+        display: inline-block;
+        margin-left: 5px;
+      }
     }
   }
 }
@@ -72,7 +79,16 @@ div.button-wrapper {
 div.button-wrapper {
   &.correct {
     button {
-      background: linear-gradient(90deg, #56ffa4, #59bc86);
+      background: linear-gradient(90deg, #13d162, #59bc86);
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: bold;
+
+      &::after {
+        content: "🎉";
+        display: inline-block;
+        margin-left: 5px;
+      }
     }
   }
 }
