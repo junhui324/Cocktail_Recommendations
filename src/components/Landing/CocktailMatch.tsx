@@ -101,10 +101,10 @@ function CocktailMatch() {
         <div className={styles.buttonBox}>
           <button 
             onClick={handleButtonClickForDetail}
-            className={styles.learnBtn}>칵테일 제조법 알아보기</button>
+            className={styles.learnBtn}>제조법 알아보기</button>
           <button 
             onClick={handleButtonClickForReload}
-            className={styles.againBtn}>칵테일 다시 추천받기</button>
+            className={styles.againBtn}>다시 추천받기</button>
         </div>
       </div>
   );
