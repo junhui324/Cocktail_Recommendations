@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CocktailList from './WeatherToGlass';
-import styles from "./Landing.module.scss"
+import styles from "./CocktailMatch.module.scss"
 import { useNavigate } from "react-router-dom";
 import { fetchWeatherData, getLocation } from '../../API/WeatherAPI/index';
 
@@ -68,8 +68,8 @@ function Landing() {
   const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
 
   return (
-      <div className={styles.weatherbox}>
-        <h3>현재 당신이 계신 곳은..</h3>
+      <div>
+        <h3>현재 위치한 곳의 날씨</h3>
         <h3>{name}</h3>
         <p>날씨 : {description} | {temperature} </p>
         
@@ -78,7 +78,7 @@ function Landing() {
           <img src={iconUrl} alt="Weather Icon" className={styles.weatherIcon}></img>
           <img src={iconUrl} alt="Weather Icon" className={styles.weatherIcon}></img>
         </div>
-        <h3>[{description}] 날씨에 어울리는 칵테일은..</h3>
+        <h3>[{description}] 날씨에 어울리는 칵테일</h3>
 
         <CocktailList 
           weather={weatherName}

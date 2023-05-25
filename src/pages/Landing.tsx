@@ -1,12 +1,15 @@
 import React from "react";
 import CocktailMatch from "../components/Landing/CocktailMatch";
-import Layout from "../Layout/Layout";
+import CHLayout from "../components/Landing/CHLayout";
+import CHPageCard from "../components/Landing/CHPageCard";
 
 function Landing() {
   return (
-    <Layout>
-      <CocktailMatch></CocktailMatch>
-    </Layout>
+    <CHLayout>
+      <CHPageCard>
+        <CocktailMatch></CocktailMatch>
+      </CHPageCard>
+    </CHLayout>
   );
 }
 
