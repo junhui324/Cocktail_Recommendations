@@ -18,6 +18,13 @@ function Pagination({
     (_, index) => index + 1
   );
 
+  const slicePageIdx =
+    currentPage % 5 !== 1
+      ? currentPage % 5 === 0
+        ? currentPage - 4
+        : currentPage - (currentPage % 5) + 1
+      : currentPage;
+
   //디버깅
   useEffect(() => {
     console.log('현재페이지', currentPage);
@@ -39,12 +46,26 @@ function Pagination({
     }
   };
 
+  const handleFirstPageClick = () => {
+    handlePageQueryChange(1);
+  };
+
+  const handleLastPageClick = () => {
+    handlePageQueryChange(totalPages);
+  };
+
   return (
     <div className={styles.paginationBar}>
-      <button onClick={handlePreviousPageClick}>이전</button>
-      {pageNumbers.map((pageNumber) =>
+      <button onClick={handleFirstPageClick}>{`<<`}</button>
+      <button onClick={handlePreviousPageClick}>{`<`}</button>
+
+      {pageNumbers.slice(slicePageIdx - 1, slicePageIdx + 4).map((pageNumber) =>
         currentPage === pageNumber ? (
-          <span key={pageNumber} className={styles.currentPageNumber}>
+          <span
+            key={pageNumber}
+            className={styles.pageNumber}
+            id={styles.selected}
+          >
             {pageNumber}
           </span>
         ) : (
@@ -58,7 +79,9 @@ function Pagination({
           </NavLink>
         )
       )}
-      <button onClick={handleNextPageClick}>다음</button>
+
+      <button onClick={handleNextPageClick}>{`>`}</button>
+      <button onClick={handleLastPageClick}>{`>>`}</button>
     </div>
   );
 }
