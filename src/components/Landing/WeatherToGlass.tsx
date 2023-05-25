@@ -36,6 +36,17 @@ interface Props {
 const CocktailList: React.FC<Props> =({ weather, onCocktailSelected }) => {
   const [cocktail, setCocktail] = useState<Cocktail | null>(null);
 
+
+  // 해당 칵테일에 관한 구글 검색 페이지로 이동하기
+  const handleGoogleSearch = () => {
+    if (cocktail && cocktail.strDrink) {
+      const searchWord = cocktail.strDrink;
+      const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchWord)}`;
+      window.open(searchUrl, '_blank');
+    }
+  };
+  
+
   useEffect(() => {
     const fetchCocktails = async () => {
       const glassOption = weatherToGlass[weather];
@@ -74,6 +85,9 @@ const CocktailList: React.FC<Props> =({ weather, onCocktailSelected }) => {
   return (
     <div>
       <h4 className={styles.cocktailName}>{cocktail.strDrink}</h4>
+      <button 
+        onClick={handleGoogleSearch}
+        className={styles.googleBtn}>칵테일 정보 Google 검색</button>
       <img 
         src={cocktail.strDrinkThumb} 
         alt={cocktail.strDrink} 
