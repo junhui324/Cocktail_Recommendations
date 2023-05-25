@@ -1,0 +1,93 @@
+div {
+  &.glass {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    background-color: #7a86b6;
+    border-radius: 20px;
+    font-size: 2em;
+    font-weight: bold;
+  }
+}
+
+div {
+  &.cocktailParty {
+    position: absolute;
+    height: 5px;
+    width: 330px;
+    background-color: #333;
+    border-radius: 5px;
+
+    div.martini {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-bottom: 25px solid #333;
+      border-right: 35px solid transparent;
+      border-left: 35px solid transparent;
+      top: -24px;
+      left: 130px;
+      transition: 0.3s ease;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-bottom: 18px solid #fff;
+        border-right: 25px solid transparent;
+        border-left: 25px solid transparent;
+        left: -25px;
+        top: 5px;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 40px;
+        background-color: #333;
+        top: -35px;
+        left: -2px;
+      }
+    }
+
+    div.martini {
+      div.glass {
+        position: absolute;
+        border-top: 50px solid #333;
+        border-right: 50px solid transparent;
+        border-left: 50px solid transparent;
+        width: 0;
+        height: 0;
+        top: -82px;
+        left: -50px;
+
+        &:before {
+          content: "";
+          position: absolute;
+          border-top: 40px solid #fff;
+          border-left: 40px solid transparent;
+          border-right: 40px solid transparent;
+          width: 0;
+          height: 0;
+          top: -46px;
+          left: -40px;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          border-top: 30px solid #ff9500;
+          border-left: 30px solid transparent;
+          border-right: 30px solid transparent;
+          width: 0;
+          height: 0;
+          top: -36px;
+          left: -30px;
+        }
+      }
+    }
+  }
+}

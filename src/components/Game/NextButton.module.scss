@@ -2,11 +2,15 @@ button {
   &.next {
     cursor: pointer;
     user-select: none;
-    font-size: 0.8rem;
-    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+
+    width: 58%;
     height: 40px;
     margin: 5px 0;
+
     background: linear-gradient(90deg, #ce82d5, #583ea6);
+    transition: 0.25s;
     border: 3px solid #ffffff;
     box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -15,7 +19,9 @@ button {
   }
 
   &.next:hover {
-    opacity: 0.8;
+    letter-spacing: 1px;
+    transform: scale(1.1);
+    cursor: pointer;
   }
 
   &.next:active {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { fetchQuestions, QuizQuestion } from "../../API/CocktailAPI";
 import GameQuiz from "./GameQuiz";
+import GameBanner from "./GameBanner";
 import StartButton from "./StartButton";
 import Score from "./Score";
 import Loading from "./Loading";
@@ -21,13 +22,15 @@ function GameStart() {
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
+
   const [gameOver, setGameOver] = useState(true);
+  const [showBanner, setShowBanner] = useState(true);
 
   const handleStart = async () => {
+    setShowBanner(false);
     setLoading(true);
     setGameOver(false);
     const newQuestions = await fetchQuestions();
-    console.log(newQuestions);
     setQuestions(newQuestions);
     setScore(0);
     setUserAnswers([]);
@@ -55,7 +58,9 @@ function GameStart() {
 
   const handleNextQuestion = () => {
     const nextQ = number + 1;
-    if (nextQ === TOTAL_QUESTIONS) {
+    console.log(nextQ);
+    if (nextQ === TOTAL_QUESTIONS - 1) {
+      console.log("game over!");
       setGameOver(true);
     } else {
       setNumber(nextQ);
@@ -64,17 +69,23 @@ function GameStart() {
 
   return (
     <>
-      <h1>Cocktail Random Quiz</h1>
-      <StartButton
-        gameOver={gameOver}
-        userAnswers={userAnswers}
-        onStart={handleStart}
-      />
-      <Score score={score} show={!gameOver} />
+      {showBanner && <GameBanner />}
+      {gameOver ? (
+        <>
+          <Score score={score} show={true} />
+          <StartButton
+            gameOver={gameOver}
+            userAnswers={userAnswers}
+            onStart={handleStart}
+          />
+        </>
+      ) : null}
+
       <Loading loading={loading} />
       {!loading && !gameOver && (
         <GameQuiz
           strDrinkThumb={questions[number].cocktail.strDrinkThumb}
+          strInstructions={questions[number].cocktail.strInstructions}
           questionNr={number + 1}
           totalQuestions={TOTAL_QUESTIONS}
           answers={questions[number].choices}
