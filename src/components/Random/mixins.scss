@@ -8,16 +8,54 @@
 
   &:hover {
     cursor: pointer;
-    background-color: #7a86b6;
+    background-color: #a8a4ce;
     color: white;
     transition: all 0.5s;
   }
 
   &:active {
-    background-color: #495c83;
+    background-color: #7a86b6;
   }
 
   &:disabled {
     cursor: not-allowed;
+  }
+}
+
+@mixin option-common {
+  .filedset {
+    margin-bottom: 10px;
+  }
+
+  .option_div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .radio_body {
+    margin-right: 10px;
+    line-height: 1.5em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+  }
+
+  [type="radio"] {
+    margin: 0;
+    margin-right: 5px;
+    appearance: none;
+    border: 2px solid #c8b6e2;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  [type="radio"]:checked {
+    border: 0.4em solid #a8a4ce;
+  }
+
+  [type="radio"]:hover {
+    box-shadow: 0 0 0 2px #a8a4ce;
+    cursor: pointer;
   }
 }

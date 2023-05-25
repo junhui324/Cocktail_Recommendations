@@ -35,19 +35,25 @@ function Category({ setCategory }: CategoryInterface) {
     <fieldset className={styles.filedset}>
       <legend>Category</legend>
 
-      {categories?.map((category: any, index: number) => (
-        <label htmlFor={`category_${category.strCategory}`} key={index}>
-          <input
-            type="radio"
-            value={category.strCategory}
-            id={`category_${category.strCategory}`}
-            name="category"
-            onChange={changeHandler}
-            checked={checked === category.strCategory}
-          />
-          {category.strCategory}
-        </label>
-      ))}
+      <div className={styles.option_div}>
+        {categories?.map((category: any, index: number) => (
+          <label
+            htmlFor={`category_${category.strCategory}`}
+            key={index}
+            className={styles.radio_body}
+          >
+            <input
+              type="radio"
+              value={category.strCategory}
+              id={`category_${category.strCategory}`}
+              name="category"
+              onChange={changeHandler}
+              checked={checked === category.strCategory}
+            />
+            {category.strCategory}
+          </label>
+        ))}
+      </div>
     </fieldset>
   );
 }
