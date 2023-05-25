@@ -105,7 +105,6 @@ function CocktailMatch() {
           <button 
             onClick={handleButtonClickForReload}
             className={styles.againBtn}>칵테일 다시 추천받기</button>
-          
         </div>
       </div>
   );
