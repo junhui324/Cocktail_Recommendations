@@ -18,16 +18,16 @@ function CheckboxAll() {
   return (
     <>
       <div className={styles.checkboxContainer}>
-        <label key={0} style={{ display: 'flex' }}>
+        <label htmlFor="checkboxAll" className={styles.label}>
           <input
             type="checkbox"
-            className="category"
+            className={styles.checkboxAll}
+            id="checkboxAll"
             checked={isCheckedAll}
             value="All"
             onChange={handleIsCheckedAll}
-            style={{ display: 'flex' }}
           />
-          All
+          <span className={styles.checkmark}></span>All
         </label>
         <Checkbox
           isCheckedAll={isCheckedAll}

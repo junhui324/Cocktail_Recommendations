@@ -2,19 +2,16 @@ import React from 'react';
 
 import Header from './Header/Header';
 import Footer from './Footer';
+import styles from './LayoutCategory.module.scss';
 
-import styles from './CSLayout.module.scss';
-
-function CWLayout(props: { children: React.ReactNode }) {
+function LayoutCategory(props: { children: React.ReactNode }) {
   return (
     <div>
       <Header />
-
       <main className={styles.main}>{props.children}</main>
-
       <Footer />
     </div>
   );
 }
 
-export default CWLayout;
+export default LayoutCategory;

@@ -1,0 +1,124 @@
+.paginationBar {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10%;
+  width: 50%;
+
+  button {
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+    border: none;
+    display: inline-block;
+    margin: 0 30px;
+    padding: 13px 27px;
+    border-radius: 15px;
+    font-family: 'paybooc-Light', sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 17px;
+    transition: 0.25s;
+
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    color: white;
+
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+
+    &:hover {
+      letter-spacing: 2px;
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+  }
+}
+
+.pageNumber {
+  color: #ecf2ff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    letter-spacing: 2px;
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  & + & {
+    margin-left: 30px;
+  }
+}
+
+#selected {
+  position: relative;
+  font-weight: bold;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    z-index: -1;
+
+    display: flex;
+    justify-content: center;
+    border: none;
+    display: inline-block;
+    padding: 15px 15px;
+    border-radius: 19px;
+    font-family: 'paybooc-Light', sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    color: white;
+
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+  }
+}
+
+@keyframes gradient1 {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.reducedNumber {
+  color: #ecf2ff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-left: 23px;
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from './ScrollHandler.module.scss';
 
 function ScrollHandler() {
   const [scrollHeight, setScrollHeight] = useState<number>(0);
@@ -34,9 +35,13 @@ function ScrollHandler() {
   };
 
   return (
-    <div className="scroll-button">
-      <button onClick={scrollToTop}>↑</button>
-      <button onClick={scrollToBottom}>↓</button>
+    <div className={styles.scrollButton}>
+      <button id={styles.scrollTopButton} onClick={scrollToTop}>
+        ▲
+      </button>
+      <button id={styles.scrollBottomButton} onClick={scrollToBottom}>
+        ▼
+      </button>
     </div>
   );
 }

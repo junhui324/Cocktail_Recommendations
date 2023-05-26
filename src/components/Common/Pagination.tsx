@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from './Pagination.module.scss';
 
 interface PaginationProps {
   totalPages: number;
@@ -16,6 +17,13 @@ function Pagination({
     { length: totalPages },
     (_, index) => index + 1
   );
+
+  const slicePageIdx =
+    currentPage % 5 !== 1
+      ? currentPage % 5 === 0
+        ? currentPage - 4
+        : currentPage - (currentPage % 5) + 1
+      : currentPage;
 
   //디버깅
   useEffect(() => {
@@ -38,26 +46,49 @@ function Pagination({
     }
   };
 
+  const handleFirstPageClick = () => {
+    handlePageQueryChange(1);
+  };
+
+  const handleLastPageClick = () => {
+    handlePageQueryChange(totalPages);
+  };
+
   return (
-    <div>
-      <button onClick={handlePreviousPageClick}>이전</button>
-      {pageNumbers.map((pageNumber) =>
+    <div className={styles.paginationBar}>
+      <button onClick={handleFirstPageClick}>{`<<`}</button>
+      <button onClick={handlePreviousPageClick}>{`<`}</button>
+
+      {pageNumbers.slice(slicePageIdx - 1, slicePageIdx + 4).map((pageNumber) =>
         currentPage === pageNumber ? (
-          <span key={pageNumber} style={{ margin: 5 }}>
+          <span
+            key={pageNumber}
+            className={styles.pageNumber}
+            id={styles.selected}
+          >
             {pageNumber}
           </span>
         ) : (
           <NavLink
             to={`?page=${pageNumber}`}
+            className={styles.pageNumber}
             key={pageNumber}
             onClick={() => handlePageClick(pageNumber)}
-            style={{ margin: 5 }}
           >
             {pageNumber}
           </NavLink>
         )
       )}
-      <button onClick={handleNextPageClick}>다음</button>
+      {pageNumbers
+        .slice(slicePageIdx - 1, slicePageIdx + 4)
+        .includes(totalPages) ? (
+        <span></span>
+      ) : (
+        <span className={styles.reducedNumber}>...</span>
+      )}
+
+      <button onClick={handleNextPageClick}>{`>`}</button>
+      <button onClick={handleLastPageClick}>{`>>`}</button>
     </div>
   );
 }

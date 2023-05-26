@@ -6,13 +6,10 @@ type cocktailListType = {
 
 const searchResultsSlice = createSlice({
   name: 'searchResults',
-  initialState: null as cocktailListType[] | null,
+  initialState: [] as cocktailListType[],
   reducers: {
-    setSearchResults: (
-      state,
-      action: PayloadAction<cocktailListType[] | null>
-    ) => {
-      return action.payload !== null ? action.payload : null;
+    setSearchResults: (state, action: PayloadAction<cocktailListType[]>) => {
+      return action.payload;
     },
   },
 });

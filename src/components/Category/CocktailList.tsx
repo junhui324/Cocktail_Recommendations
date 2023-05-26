@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AlcoholFilteredListContext } from './AlcoholicOps';
-import { RootState } from '../../store/CategoryStore';
-import Pagination from './Pagination';
+import { RootState } from '../../store/store';
+import Pagination from '../Common/Pagination';
 import styles from './CocktailList.module.scss';
 import { useSelector } from 'react-redux';
 
@@ -21,7 +21,7 @@ function CocktailList() {
   const queryParams = new URLSearchParams(location.search);
   const pageNumber = parseInt(queryParams.get('page') || '1');
 
-  const cocktailsPerPage = 30;
+  const cocktailsPerPage = 20;
   const totalPages = Math.ceil(cocktailList.length / cocktailsPerPage);
   const firstCocktailIdx = (currentPage - 1) * cocktailsPerPage;
   const lastCocktailIdx = firstCocktailIdx + cocktailsPerPage;
@@ -54,35 +54,36 @@ function CocktailList() {
   };
 
   return (
-    <>
-      <p className={styles.cocktailContainer}>
-        {currentPageCocktails.length !== 0 ? (
-          currentPageCocktails.map((cocktail, idx) => (
-            <section key={idx}>
-              <div>
-                <NavLink to={`/detail/${cocktail.idDrink}`}>
-                  <img
-                    src={cocktail.strDrinkThumb}
-                    alt={cocktail.strDrink}
-                    style={{
-                      margin: 0,
-                      width: 250,
-                      height: 250,
-                      display: 'flex',
-                    }}
-                  />
-                </NavLink>
-                <NavLink to={`/detail/${cocktail.idDrink}`}>
-                  {cocktail.strDrink}
-                </NavLink>
-              </div>
-            </section>
-          ))
-        ) : (
-          <div>설정된 카테고리에 해당하는 칵테일이 없습니다.</div>
-        )}
-      </p>
+    <article className={styles.cocktailContainer}>
+      {currentPageCocktails.length !== 0 ? (
+        currentPageCocktails.map((cocktail, idx) => (
+          <div key={idx}>
+            <NavLink to={`/detail/${cocktail.idDrink}`}>
+              <img
+                className={styles.cocktailImage}
+                src={cocktail.strDrinkThumb}
+                alt={cocktail.strDrink}
+              />
+            </NavLink>
 
+            <NavLink
+              to={`/detail/${cocktail.idDrink}`}
+              className={styles.cocktailName}
+            >
+              {cocktail.strDrink.length > 20
+                ? `${cocktail.strDrink.substring(0, 17)}...`
+                : cocktail.strDrink}
+            </NavLink>
+          </div>
+        ))
+      ) : (
+        <div className={styles.nonResultMessage}>
+          ☹
+          <p id={styles.resultMessage}>
+            설정된 카테고리에 해당하는 칵테일이 없습니다.
+          </p>
+        </div>
+      )}
       {currentPageCocktails.length !== 0 && (
         <Pagination
           totalPages={totalPages}
@@ -90,7 +91,7 @@ function CocktailList() {
           handlePageQueryChange={handlePageQueryChange}
         />
       )}
-    </>
+    </article>
   );
 }
 
