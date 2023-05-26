@@ -1,8 +1,8 @@
+import WeatherPagination from './Pagination/WeatherPagination';
 import React, { useState, useEffect } from 'react';
 import { getCocktailWithWeather } from '../../API/CocktailAPI/index';
 import styles from './Cocktail.module.scss';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import Pagination from '../Pagination/Pagination';
 
 type Drink = {
   idDrink: string;
@@ -43,7 +43,11 @@ export function Cocktail({ mainWeather }: CocktailProps) {
   }, [pageNumber]);
 
   const handlePageQueryChange = (targetPageNumber: number) => {
+    if (targetPageNumber < 1) {
+      targetPageNumber = 1;
+    }
     setCurrentPage(() => targetPageNumber);
+    console.log('targetPageNumber : ' + targetPageNumber);
     queryParams.set('page', targetPageNumber.toString());
     navigate(`?${queryParams.toString()}`);
   };
@@ -70,14 +74,18 @@ export function Cocktail({ mainWeather }: CocktailProps) {
 
       if (option) {
         setCocktailsPerPage(option.cocktailsPerPage);
+
         // Check if current page is still valid
-        if (
+        if (currentPage <= 1) {
+          // Check if currentPage is less than or equal to 1
+          setCurrentPage(1);
+        } else if (
           currentPage > Math.ceil(cocktail.length / option.cocktailsPerPage)
         ) {
           const validPage = Math.ceil(
             cocktail.length / option.cocktailsPerPage
           );
-          setCurrentPage(validPage);
+          setCurrentPage(() => validPage);
 
           // Update URL parameter with valid page
           queryParams.set('page', validPage.toString());
@@ -105,8 +113,6 @@ export function Cocktail({ mainWeather }: CocktailProps) {
     };
   }, [cocktail, currentPage]);
 
-  console.log(totalPages);
-
   return (
     <div>
       <div className={styles.cocktail}>
@@ -128,7 +134,7 @@ export function Cocktail({ mainWeather }: CocktailProps) {
 
       <div className={styles.page}>
         {currentPageCocktails.length !== 0 && (
-          <Pagination
+          <WeatherPagination
             totalPages={totalPages}
             currentPage={currentPage}
             handlePageQueryChange={handlePageQueryChange}
