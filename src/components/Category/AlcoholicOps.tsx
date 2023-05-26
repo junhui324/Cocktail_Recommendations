@@ -1,21 +1,21 @@
 import React, { useState, useEffect, createContext } from 'react';
+import { RootState } from '../../store/store';
+import { useSelector } from 'react-redux';
 import CheckboxAll from './CheckboxAll';
 import CocktailList from './CocktailList';
+import styles from './AlcoholicOps.module.scss';
 
 type cocktailListType = {
   [key: string]: string;
 };
 
-interface alcoholicOpsPropsType {
-  wholeCocktails: cocktailListType[];
-}
-
 export const AlcoholFilteredListContext = createContext<cocktailListType[]>([]);
 
-function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
+function AlcoholicOps() {
+  const searchResults = useSelector((state: RootState) => state.searchResults);
   const [alcoholicOps, setAlcoholicOps] = useState<string>('All');
   const [alcoholFilteredList, setAlcoholFilteredList] =
-    useState<cocktailListType[]>(wholeCocktails);
+    useState<cocktailListType[]>(searchResults);
 
   //디버깅
   useEffect(() => {
@@ -26,13 +26,13 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
   //알코올 필터링
   useEffect(() => {
     setAlcoholFilteredList(() => {
-      return wholeCocktails;
+      return searchResults;
     });
-  }, [wholeCocktails]);
+  }, [searchResults]);
 
   useEffect(() => {
     if (alcoholicOps !== 'All') {
-      const newCocktailList = wholeCocktails.filter(
+      const newCocktailList = searchResults.filter(
         (cocktail) =>
           cocktail.strAlcoholic === alcoholicOps ||
           cocktail.strAlcoholic === 'Optional alcohol'
@@ -41,7 +41,7 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
       return;
     }
     setAlcoholFilteredList(() => {
-      const cocktailListNonOps = [...wholeCocktails];
+      const cocktailListNonOps = [...searchResults];
       return cocktailListNonOps;
     });
   }, [alcoholicOps]);
@@ -52,27 +52,49 @@ function AlcoholicOps({ wholeCocktails }: alcoholicOpsPropsType) {
   };
 
   return (
-    <>
-      <div style={{ display: 'flex', alignItems: 'flex-start', margin: 0 }}>
-        <button className="filter" value="All" onClick={handleOnClick}>
+    <section className={styles.mainContents}>
+      <nav className={styles.alcoholicFilterContainer}>
+        <button
+          className={
+            alcoholicOps === 'All'
+              ? styles.activeAlcoholicFilter
+              : styles.alcoholicFilter
+          }
+          value="All"
+          onClick={handleOnClick}
+        >
           All
         </button>
-        <button className="filter" value="Alcoholic" onClick={handleOnClick}>
+        <button
+          className={
+            alcoholicOps === 'Alcoholic'
+              ? styles.activeAlcoholicFilter
+              : styles.alcoholicFilter
+          }
+          value="Alcoholic"
+          onClick={handleOnClick}
+        >
           Alcoholic
         </button>
         <button
-          className="filter"
+          className={
+            alcoholicOps === 'Non alcoholic'
+              ? styles.activeAlcoholicFilter
+              : styles.alcoholicFilter
+          }
           value="Non alcoholic"
           onClick={handleOnClick}
         >
           Non-Alcoholic
         </button>
+      </nav>
+      <div className={styles.contentsContainer}>
+        <AlcoholFilteredListContext.Provider value={alcoholFilteredList}>
+          <CheckboxAll />
+          <CocktailList />
+        </AlcoholFilteredListContext.Provider>
       </div>
-      <AlcoholFilteredListContext.Provider value={alcoholFilteredList}>
-        <CheckboxAll />
-        <CocktailList />
-      </AlcoholFilteredListContext.Provider>
-    </>
+    </section>
   );
 }
 

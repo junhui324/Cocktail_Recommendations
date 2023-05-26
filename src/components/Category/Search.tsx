@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import AlcoholicOps from './AlcoholicOps';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../store/store';
+import { setSearchResults } from '../../store/searchResultsSlice';
 import styles from './Search.module.scss';
 
 type cocktailListType = {
@@ -11,9 +13,8 @@ interface searchPropsType {
 }
 
 function Search({ wholeCocktails }: searchPropsType) {
-  const [searchResults, setSearchResults] = useState<cocktailListType[] | null>(
-    null
-  );
+  const searchResults = useSelector((state: RootState) => state.searchResults);
+  const dispatch = useDispatch<AppDispatch>();
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,6 +24,10 @@ function Search({ wholeCocktails }: searchPropsType) {
   useEffect(() => {
     console.log('쿼리', searchQuery);
   }, [searchQuery]);
+
+  useEffect(() => {
+    dispatch(setSearchResults(wholeCocktails));
+  }, [wholeCocktails]);
 
   const searchCocktails = (searchQuery: string) => {
     const filteredCocktails = wholeCocktails.filter((cocktail) => {
@@ -36,8 +41,8 @@ function Search({ wholeCocktails }: searchPropsType) {
     e.preventDefault();
     const submittedQuery = e.target.searchQuery.value;
     if (submittedQuery !== null) {
-      const results = searchCocktails(submittedQuery);
-      setSearchResults(() => results);
+      const results = searchCocktails(submittedQuery); //제출이 null이 아니라면 searchResult에 검색결과 담김
+      dispatch(setSearchResults(results));
       return;
     }
   };
@@ -47,19 +52,20 @@ function Search({ wholeCocktails }: searchPropsType) {
   };
 
   return (
-    <>
-      <form className={styles.searchContainer} onSubmit={handleSubmitQuery}>
+    <div className={styles.searchContainer}>
+      <form className={styles.searchBar} onSubmit={handleSubmitQuery}>
         <input
+          id={styles.inputBar}
           type="text"
           name="searchQuery"
+          placeholder="칵테일명을 입력해주세요."
           onChange={handleSearchInputChange}
         />
-        <button type="submit">검색</button>
+        <button id={styles.searchButton} type="submit">
+          검색
+        </button>
       </form>
-      <AlcoholicOps
-        wholeCocktails={searchResults !== null ? searchResults : wholeCocktails}
-      />
-    </>
+    </div>
   );
 }
 

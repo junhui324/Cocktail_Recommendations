@@ -2,11 +2,12 @@ import React from 'react';
 
 import Header from './Header/Header';
 import Footer from './Footer';
-import styles from './Layout.module.scss';
 
-function Layout(props: { children: React.ReactNode }) {
+import styles from './CSLayout.module.scss';
+
+function CWLayout(props: { children: React.ReactNode }) {
   return (
-    <div className={styles.layout}>
+    <div>
       <Header />
 
       <main className={styles.main}>{props.children}</main>
@@ -16,4 +17,4 @@ function Layout(props: { children: React.ReactNode }) {
   );
 }
 
-export default Layout;
+export default CWLayout;

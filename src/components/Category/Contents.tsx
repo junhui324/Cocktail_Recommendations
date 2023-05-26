@@ -1,12 +1,12 @@
-import React, { useEffect, useState, createContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getWholeCocktailUsingAlphabet } from '../../API/CocktailAPI';
+import styles from './Contents.module.scss';
 import Search from './Search';
+import { NavLink } from 'react-router-dom';
 
 interface cocktailListType {
   [key: string]: string;
 }
-
-export const WholeCocktailsContext = createContext<cocktailListType[]>([]);
 
 function Contents() {
   const [wholeCocktails, setWholeCocktails] = useState<cocktailListType[]>([]);
@@ -32,9 +32,14 @@ function Contents() {
   }, []);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+    <>
+      <div className={styles.titleBox}>
+        <NavLink to="/category" className={styles.title}>
+          Browsing our cocktails!
+        </NavLink>
+      </div>
       <Search wholeCocktails={wholeCocktails} />
-    </div>
+    </>
   );
 }
 

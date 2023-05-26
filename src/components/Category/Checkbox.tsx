@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CATEGORY from './Constant';
-import { RootState, AppDispatch } from '../../store/CategoryStore';
+import { RootState, AppDispatch } from '../../store/store';
 import { setIsChecked } from '../../store/isCheckedSlice';
 import styles from './Checkbox.module.scss';
 
@@ -25,11 +25,9 @@ function Checkbox({ isCheckedAll, setIsCheckedAll }: checkBoxPropsType) {
     if (checked) {
       const addIsChecked = [...isChecked, value];
       dispatch(setIsChecked(addIsChecked));
-      // setIsChecked(() => addIsChecked);
       return;
     }
     const subIsChecked = isChecked.filter((category) => category !== value);
-    // setIsChecked(() => subIsChecked);
     dispatch(setIsChecked(subIsChecked));
   };
 
@@ -48,7 +46,6 @@ function Checkbox({ isCheckedAll, setIsCheckedAll }: checkBoxPropsType) {
   useEffect(() => {
     const categories = Object.values(CATEGORY);
     if (!isCheckedAll && isChecked.length === categories.length) {
-      // return setIsChecked(() => []);
       dispatch(setIsChecked([]));
       return;
     }
@@ -64,21 +61,26 @@ function Checkbox({ isCheckedAll, setIsCheckedAll }: checkBoxPropsType) {
 
   return (
     <>
-      <div className={styles.checkboxContainer}>
-        {Object.values(CATEGORY).map((category, idx) => (
-          <label key={idx + 1} style={{ display: 'flex' }}>
+      {Object.values(CATEGORY).map((category, idx) => (
+        <>
+          <label
+            key={idx + 1}
+            htmlFor={`checkbox-${idx + 1}`}
+            className={styles.label}
+          >
             <input
               type="checkbox"
-              className="category"
+              className={styles.checkbox}
+              id={`checkbox-${idx + 1}`}
               checked={isChecked.includes(category)}
               value={category}
               onChange={handleIsChecked}
-              style={{ display: 'flex' }}
             />
+            <span className={styles.checkmark}></span>
             {category}
           </label>
-        ))}
-      </div>
+        </>
+      ))}
     </>
   );
 }

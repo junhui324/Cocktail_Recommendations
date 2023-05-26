@@ -1,0 +1,166 @@
+body {
+  background-color: #2a2f4f;
+  margin: 0;
+}
+
+header {
+  background-color: #fff;
+}
+
+footer {
+  background-color: #fff;
+}
+
+.layout {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+  width: 70vw;
+  max-width: 100%;
+  // height: 70vh;
+  height: auto;
+  background-color: #fff;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px #495c83;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.drink_img {
+  display: block;
+  width: 400px;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #495c83;
+  overflow: auto;
+
+  // @media (max-width: 768px) {
+  //   width: 100%;
+  //   height: auto;
+  //   max-width: 400px;
+  //   max-height: 400px;
+  // }
+}
+
+.drink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 40px;
+  position: relative;
+  box-sizing: border-box;
+  background-color: #fff;
+  // width: 100%;
+  height: auto;
+
+  // @media (max-width: 768px) {
+  //   width: 80%;
+  //   margin: 20px 0;
+  // }
+}
+
+.layout h1 {
+  text-align: center;
+  text-shadow: 1px 1px 1px #495c83;
+  color: #2a2f4f;
+}
+
+.layout h2 {
+  text-shadow: 1px 1px 1px #495c83;
+  color: #2a2f4f;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin-right: 30px;
+  width: 30vw;
+  height: auto;
+  background-color: #fff;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+}
+
+.instructions {
+  margin: 20px 0;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+    font-size: small;
+  }
+}
+
+.instruction_font {
+  font-size: medium;
+  overflow-wrap: break-word;
+  color: #2a2f4f;
+
+  @media (max-width: 768px) {
+    font-size: small;
+  }
+}
+
+.layout hr {
+  border: solid #2a2f4f 2px;
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+}
+
+.ingredients_container {
+  display: flex;
+  flex-wrap: wrap; // 한 줄에 4개씩 보이게
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%; // 한 줄에 4개씩 보이게
+  box-sizing: border-box;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    width: 50%;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+.ingredient_img {
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+
+  // @media (max-width: 768px) {
+  //   width: 100px;
+  //   height: auto;
+  //   max-width: 100%;
+  //   max-height: 150px;
+  // }
+}
+
+.ingredient_name {
+  margin-bottom: 30px;
+  font-size: medium;
+  color: #2a2f4f;
+}

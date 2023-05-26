@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import Logo from "./Logo";
-import NavBar from "./NavBar";
-import Hamburger from "./Hamburger";
-import HamburgerMenu from "./HamburgerMenu";
-import styles from "./Header.module.scss";
+import Logo from './Logo';
+import NavBar from './NavBar';
+import Hamburger from './Hamburger';
+import HamburgerMenu from './HamburgerMenu';
+import styles from './Header.module.scss';
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
