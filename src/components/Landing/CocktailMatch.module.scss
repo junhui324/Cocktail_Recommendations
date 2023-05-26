@@ -79,10 +79,10 @@
   align-items: center;
 }
 
-.learnBtn:focus, .againBtn:focus, .locationBtn:focus {
-  color: white;
-  outline: 0;
-}
+// .learnBtn:focus, .againBtn:focus, .locationBtn:focus {
+//   color: white;
+//   outline: 0;
+// }
 
 .learnBtn:hover, .againBtn:hover, .locationBtn:hover {
   box-shadow: 0 0 40px 40px #917FB3 inset;
