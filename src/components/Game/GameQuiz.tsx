@@ -1,6 +1,7 @@
 import React from "react";
 import { AnswerObject } from "./GameStart";
 import ButtonWrapper from "./GameButton";
+import CocktailContainer from "../Common/CocktailContainer";
 
 type GameQuizProps = {
   questionNr: number;
@@ -9,6 +10,7 @@ type GameQuizProps = {
   userAnswer: AnswerObject | undefined;
   callback: (e: React.MouseEvent<HTMLButtonElement>) => void;
   strDrinkThumb: string;
+  strInstructions: string;
 };
 
 function GameQuiz({
@@ -18,17 +20,24 @@ function GameQuiz({
   userAnswer,
   callback,
   strDrinkThumb,
+  strInstructions,
 }: GameQuizProps) {
   // answers 배열에서 랜덤하게 4개의 요소 선택
   const uniqueAnswers = Array.from(new Set(answers));
 
   return (
     <div>
-      <p className="number">
-        질문: {questionNr} / {totalQuestions}
+      <p className="number" style={{ fontWeight: "bold" }}>
+        {questionNr} / {totalQuestions}
       </p>
 
-      <img src={strDrinkThumb} alt="cocktail" style={{ width: "400px" }} />
+      <CocktailContainer
+        src={strDrinkThumb}
+        alt="cocktail"
+        name={""}
+        upward={true}
+      />
+      <p>{strInstructions}</p>
       <div>
         {uniqueAnswers.map((answer) => (
           <ButtonWrapper

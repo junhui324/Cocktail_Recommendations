@@ -1,12 +1,12 @@
-import Layout from '../Layout/Layout';
-import GameStart from '../components/Game/GameStart';
-
+import Layout from "../Layout/Layout";
+import GameStart from "../components/Game/GameStart";
+import PageCard from "../components/Common/PageCard";
 function Game() {
   return (
     <Layout>
-      <div>
+      <PageCard>
         <GameStart />
-      </div>
+      </PageCard>
     </Layout>
   );
 }
