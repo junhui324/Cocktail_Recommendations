@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './Pagination.module.scss';
+import styles from './WeatherPagination.module.scss';
 
 interface PaginationProps {
   totalPages: number;
@@ -13,7 +13,7 @@ const activeStyle = {
   color: 'white',
 };
 
-function Pagination({
+function WeatherPagination({
   totalPages,
   currentPage,
   handlePageQueryChange,
@@ -68,4 +68,4 @@ function Pagination({
   );
 }
 
-export default Pagination;
+export default WeatherPagination;
