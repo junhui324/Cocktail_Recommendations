@@ -1,10 +1,11 @@
 import React from 'react';
-import LayoutCategory from '../Layout/LayoutCategory';
+// import LayoutCategory from '../Layout/LayoutCategory';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
 import Contents from '../components/Category/Contents';
 import AlcoholicOps from '../components/Category/AlcoholicOps';
 import ScrollHandler from '../components/Category/ScrollHandler';
+import LayoutCategory from '../Layout/LayoutCategory';
 
 function Category() {
   return (

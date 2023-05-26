@@ -9,8 +9,6 @@
 
 .mainContents {
   display: grid;
-  grid-template-columns: auto; /* 1개의 컬럼 설정 */
-  grid-template-rows: auto; /* 필요한 만큼의 로우 설정 */
   justify-items: flex-start;
   align-items: flex-start;
   padding: 150px 120px 150px 0;
@@ -27,8 +25,8 @@
     border: none;
     padding: 0;
     font-size: 20px;
-    color: inherit;
     cursor: pointer;
+    color: #ecf2ff;
   }
 
   button + button {
