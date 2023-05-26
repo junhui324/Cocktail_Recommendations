@@ -35,19 +35,25 @@ function Alcohol({ setAlcoholic }: AlcoholInterface) {
     <fieldset className={styles.filedset}>
       <legend>Alcohol</legend>
 
-      {alcohol?.map((item: any, index: number) => (
-        <label htmlFor={`alcohol_${item.strAlcoholic}`} key={index}>
-          <input
-            type="radio"
-            value={item.strAlcoholic}
-            id={`alcohol_${item.strAlcoholic}`}
-            name="alcohol"
-            onChange={changeHandler}
-            checked={checked === item.strAlcoholic}
-          />
-          {item.strAlcoholic}
-        </label>
-      ))}
+      <div className={styles.option_div}>
+        {alcohol?.map((item: any, index: number) => (
+          <label
+            htmlFor={`alcohol_${item.strAlcoholic}`}
+            key={index}
+            className={styles.radio_body}
+          >
+            <input
+              type="radio"
+              value={item.strAlcoholic}
+              id={`alcohol_${item.strAlcoholic}`}
+              name="alcohol"
+              onChange={changeHandler}
+              checked={checked === item.strAlcoholic}
+            />
+            {item.strAlcoholic}
+          </label>
+        ))}
+      </div>
     </fieldset>
   );
 }

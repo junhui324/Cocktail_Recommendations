@@ -1,5 +1,10 @@
 .backdrop {
+  visibility: hidden;
   background-color: rgba(0, 0, 0, 0.5);
   width: 30vw;
   height: 100vh;
+}
+
+.backdrop.toggle {
+  visibility: visible;
 }

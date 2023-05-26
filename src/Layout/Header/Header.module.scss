@@ -1,3 +1,20 @@
 .header {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  transition: all ease-in-out 500ms;
+  transform: translateY(-100%);
+  height: 45px;
+  width: 100%;
+  background-color: white;
+}
+
+.header.scrolled {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .header {
+    justify-content: center;
+  }
 }

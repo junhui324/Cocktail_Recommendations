@@ -1,5 +1,6 @@
 import React from "react";
 
+import { GiHamburgerMenu } from "react-icons/gi";
 import styles from "./Hamburger.module.scss";
 
 interface HamburgerInterface {
@@ -8,9 +9,9 @@ interface HamburgerInterface {
 
 function Hamburger({ clickHandler }: HamburgerInterface) {
   return (
-    <div className={styles.div}>
-      <button onClick={clickHandler}>햄버거</button>
-    </div>
+    <button onClick={clickHandler} className={styles.toggle_btn}>
+      <GiHamburgerMenu size={30} />
+    </button>
   );
 }
 

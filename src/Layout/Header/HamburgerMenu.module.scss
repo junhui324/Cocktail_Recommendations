@@ -1,7 +1,12 @@
 .menu {
+  visibility: hidden;
   display: flex;
-  z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
+}
+
+.menu.toggle_menu {
+  visibility: visible;
 }

@@ -6,7 +6,7 @@ import styles from './Layout.module.scss';
 
 function Layout(props: { children: React.ReactNode }) {
   return (
-    <div>
+    <div className={styles.layout}>
       <Header />
 
       <main className={styles.main}>{props.children}</main>
