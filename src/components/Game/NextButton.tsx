@@ -8,7 +8,7 @@ function NextButton({ onNext }: NextButtonProps) {
   return (
     <>
       <button className={styles.next} onClick={onNext}>
-        다음 문제
+        Next ⮕
       </button>
     </>
   );
