@@ -1,0 +1,96 @@
+// 로딩페이지 시작 
+.loadingPg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 26px;
+  animation: pulse 0.4s 3;
+  color: #2a2f4f;
+  font-weight: 700;
+
+}
+
+@keyframes pulse {
+  0% {
+    font-size: 26px;
+  }
+  50% {
+    font-size: 32px;
+  }
+  100% {
+    font-size: 26px;
+  }
+}
+// 로딩 페이지 끝
+
+
+// 카드페이지
+.h3, .p {
+    color: #2a2f4f;
+    margin: 8px;
+}
+
+
+// 날씨 아이콘 시작
+.weatherIcons {
+  width: 30%;
+  display: flex;
+  margin: 0 auto;
+  overflow: hidden;
+  }
+  
+  .weatherIcon {
+  animation: moveX 2s infinite linear;
+  }
+  
+  @keyframes moveX {
+  0% {
+    transform: translateX(-100%); 
+  }
+  100% {
+    transform: translateX(0%); 
+  }
+  }
+
+// 날씨 아이콘 끝
+
+
+// 버튼 박스 시작
+.buttonBox {
+  display: flex;
+  justify-content: center;
+}
+
+.learnBtn, .againBtn, .locationBtn {
+  background-color: #2A2F4F;
+  color: white;
+  border: none;
+  margin: 10px;
+  padding: 15px;
+  cursor: pointer;
+  line-height: 0.5;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 600;
+  transition: box-shadow 400ms ease-in-out, color 300ms ease-in-out;
+  // display: flex;
+  // justify-content: center;
+  align-items: center;
+}
+
+.learnBtn:focus, .againBtn:focus, .locationBtn:focus {
+  color: white;
+  outline: 0;
+}
+
+.learnBtn:hover, .againBtn:hover, .locationBtn:hover {
+  box-shadow: 0 0 40px 40px #917FB3 inset;
+  color: white;
+  border: none;
+}
+
+// 버튼 박스 끝
+
+
+

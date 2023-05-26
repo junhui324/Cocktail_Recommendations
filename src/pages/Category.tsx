@@ -8,10 +8,12 @@ import ScrollHandler from '../components/Category/ScrollHandler';
 function Category() {
   return (
     <Layout>
-      <Provider store={CategoryStore}>
-        <Contents />
-        <ScrollHandler />
-      </Provider>
+      <div>
+        <Provider store={CategoryStore}>
+          <Contents />
+          <ScrollHandler />
+        </Provider>
+      </div>
     </Layout>
   );
 }

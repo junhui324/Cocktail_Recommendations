@@ -1,0 +1,23 @@
+@mixin button-common {
+  all: unset;
+  width: auto;
+  padding: 5px 10px;
+  text-align: center;
+  border: 1px solid #a8a4ce;
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #7a86b6;
+    color: white;
+    transition: all 0.5s;
+  }
+
+  &:active {
+    background-color: #495c83;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

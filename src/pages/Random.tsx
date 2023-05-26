@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { getRandomCockTail } from "../API/CocktailAPI";
-import Information from "../components/Random/Information";
-import Favour from "../components/Random/Favour";
-import NoData from "../components/Random/NoData";
-import Layout from "../Layout/Layout";
+import { getRandomCockTail } from '../API/CocktailAPI';
+import Information from '../components/Random/Information';
+import Favour from '../components/Random/Favour';
+import NoData from '../components/Random/NoData';
+import Layout from '../Layout/Layout';
+import PageCard from '../components/Common/PageCard';
+import PageTitle from '../components/Random/PageTitle';
 
 function Random() {
   const [random, setRandom] = useState<any>();
@@ -22,13 +24,15 @@ function Random() {
   return (
     <Layout>
       <div>
-        <h1>How about this Cocktail?</h1>
+        <PageCard>
+          <PageTitle />
 
-        {random ? <Information random={random} /> : <NoData />}
+          {random ? <Information random={random} /> : <NoData />}
 
-        <hr />
+          <hr style={{ width: '100%' }} />
 
-        <Favour setRandom={setRandom} />
+          <Favour setRandom={setRandom} />
+        </PageCard>
       </div>
     </Layout>
   );
