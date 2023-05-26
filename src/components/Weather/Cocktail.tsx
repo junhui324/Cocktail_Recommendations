@@ -14,8 +14,15 @@ type CocktailProps = {
   mainWeather: string;
 };
 
+const cocktailPerPageOptions = [
+  { screenSize: 'small', cocktailsPerPage: 10 },
+  { screenSize: 'medium', cocktailsPerPage: 15 },
+  { screenSize: 'large', cocktailsPerPage: 20 },
+];
+
 export function Cocktail({ mainWeather }: CocktailProps) {
   const [cocktail, setCocktail] = useState<Drink[]>([]);
+  const [cocktailsPerPage, setCocktailsPerPage] = useState(20);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,7 +30,6 @@ export function Cocktail({ mainWeather }: CocktailProps) {
   const pageNumber = parseInt(queryParams.get('page') || '1');
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const cocktailsPerPage = 20;
   const totalPages = Math.ceil(cocktail.length / cocktailsPerPage);
   const firstCocktailIdx = (currentPage - 1) * cocktailsPerPage;
   const lastCocktailIdx = firstCocktailIdx + cocktailsPerPage;
@@ -46,7 +52,6 @@ export function Cocktail({ mainWeather }: CocktailProps) {
     const getCocktail = async () => {
       try {
         const cocktailData = await getCocktailWithWeather(mainWeather);
-        //console.log(cocktailData);
         setCocktail(cocktailData);
       } catch (error) {
         console.error('Error:', error);
@@ -55,6 +60,52 @@ export function Cocktail({ mainWeather }: CocktailProps) {
 
     getCocktail();
   }, [mainWeather]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const currentScreenSize = getCurrScreenSize();
+      const option = cocktailPerPageOptions.find(
+        (item) => item.screenSize === currentScreenSize
+      );
+
+      if (option) {
+        setCocktailsPerPage(option.cocktailsPerPage);
+        // Check if current page is still valid
+        if (
+          currentPage > Math.ceil(cocktail.length / option.cocktailsPerPage)
+        ) {
+          const validPage = Math.ceil(
+            cocktail.length / option.cocktailsPerPage
+          );
+          setCurrentPage(validPage);
+
+          // Update URL parameter with valid page
+          queryParams.set('page', validPage.toString());
+          navigate(`?${queryParams.toString()}`);
+        }
+      }
+    };
+
+    const getCurrScreenSize = () => {
+      if (window.innerWidth >= 1024) {
+        return 'large';
+      } else if (window.innerWidth >= 768) {
+        return 'medium';
+      } else {
+        return 'small';
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [cocktail, currentPage]);
+
+  console.log(totalPages);
 
   return (
     <div>
